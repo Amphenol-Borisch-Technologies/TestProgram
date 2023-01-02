@@ -12,12 +12,13 @@ namespace isoMicro {
     internal class isoMicroForm : TestForm {
         internal isoMicroForm() : base() { }
 
-        protected override String RunTest(Test test) {
+        protected override String RunTest(Test test, ref Dictionary<String, Instrument> instruments) {
             // https://stackoverflow.com/questions/540066/calling-a-function-from-a-string-in-c-sharp
             // https://www.codeproject.com/Articles/19911/Dynamically-Invoke-A-Method-Given-Strings-with-Met
+            // Pass instruments by ref so it doesn't have to be copied, not because it will be modified.
             Type type = this.GetType();
             MethodInfo methodInfo = type.GetMethod(test.ID, BindingFlags.Static | BindingFlags.NonPublic);
-            return (String)methodInfo.Invoke(this, new object[] { test, base.instruments });
+            return (String)methodInfo.Invoke(this, new object[] { test, instruments });
         }
 
         internal static void EnableNLow() {
