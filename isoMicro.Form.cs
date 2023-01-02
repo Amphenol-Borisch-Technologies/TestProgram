@@ -12,10 +12,14 @@ namespace isoMicro {
     internal class isoMicroForm : TestForm {
         internal isoMicroForm() : base() { }
 
-        protected override String RunTest(Test test, ref Dictionary<String, Instrument> instruments) {
+        protected override String RunTest(Test test, Dictionary<String, Instrument> instruments) {
             // https://stackoverflow.com/questions/540066/calling-a-function-from-a-string-in-c-sharp
             // https://www.codeproject.com/Articles/19911/Dynamically-Invoke-A-Method-Given-Strings-with-Met
-            // Pass instruments by ref so it doesn't have to be copied, not because it will be modified.
+            // Override TestForm's abstract RunTest() method.  Necessary because implementing RunTest()
+            // in ABTTestLibrary's RunTest() method would necessiate in having a reference to this
+            // client Test project, and we don't want that.
+            // We instead want this client Test project to reference the ABTTEstLibray, and ABTTestLibary
+            // to be blissfully ignorant of this client Test project.
             Type type = this.GetType();
             MethodInfo methodInfo = type.GetMethod(test.ID, BindingFlags.Static | BindingFlags.NonPublic);
             return (String)methodInfo.Invoke(this, new object[] { test, instruments });

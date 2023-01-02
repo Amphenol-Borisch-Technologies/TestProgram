@@ -19,11 +19,11 @@ namespace isoMicro {
     internal static class T50 {
         private static DialogResult _dialogResult;
 
-        internal static String P10300(Test test, ref Dictionary<String, Instrument> instruments) {
+        internal static String P10300(Test test, Dictionary<String, Instrument> instruments) {
             return "6.25";
         }
 
-        internal static String P10301(Test test, ref Dictionary<String, Instrument> instruments) {
+        internal static String P10301(Test test, Dictionary<String, Instrument> instruments) {
             return "0.5";
         }
     }
