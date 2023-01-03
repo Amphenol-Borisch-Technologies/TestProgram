@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("isoMicro")]
-[assembly: AssemblyDescription("Skeleton test program")]
+[assembly: AssemblyDescription("Raytheon D4522137-2 Functional Test")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Amphenol Borisch Technologies")]
 [assembly: AssemblyProduct("isoMicro")]

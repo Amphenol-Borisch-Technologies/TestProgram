@@ -49,16 +49,16 @@ namespace isoMicro {
             _dialogResult = MessageBox.Show($"Connect PICkit 4 IC programmer to isoMicro UUT per Table 7.{Environment.NewLine}{Environment.NewLine}" +
                 $"Press OK when completed, Cancel to cancel.", "Connect PICkit 4", MessageBoxButtons.OKCancel);
             // TODO: State which reference designator what Table 7's connector is.
-            if (_dialogResult == DialogResult.Cancel) throw new ABTAbortException("Operator cancelled secondary side PICkit 4 pre-program, aborting.");
+            if (_dialogResult == DialogResult.Cancel) throw new TestAbortException("Operator cancelled secondary side PICkit 4 pre-program, aborting.");
             P00200(test, instruments);
             // TODO: launch MPLAB IPE programmatically, with a script.
 
-            // If IPE returns unsuccessfully, throw an ABTAbortException();
+            // If IPE returns unsuccessfully, throw an TestAbortException();
             // If not, close MPLAB IPE programmatically.
             E3610xB.Off(instruments[Instrument.POWER_SECONDARY]);
             _dialogResult = MessageBox.Show($"Disconnect PICkit 4 IC programmer from isoMicro UUT.{Environment.NewLine}{Environment.NewLine}" +
                 $"Press OK when completed, Cancel to cancel.", "Disconnect PICkit 4", MessageBoxButtons.OKCancel);
-            if (_dialogResult == DialogResult.Cancel) throw new ABTAbortException("Operator cancelled secondary side PICkit 4 post-program, aborting.");
+            if (_dialogResult == DialogResult.Cancel) throw new TestAbortException("Operator cancelled secondary side PICkit 4 post-program, aborting.");
             return P00200(test, instruments);
         }
         internal static String P00301(Test test, Dictionary<String, Instrument> instruments) {
@@ -70,16 +70,16 @@ namespace isoMicro {
             _dialogResult = MessageBox.Show($"Connect PICkit 4 IC programmer to isoMicro UUT per Table 9.{Environment.NewLine}{Environment.NewLine}" +
                 $"Press OK when completed, Cancel to cancel.", "Connect PICkit 4", MessageBoxButtons.OKCancel);
             // TODO: State which reference designator what Table 9's connector is.
-            if (_dialogResult == DialogResult.Cancel) throw new ABTAbortException("Operator cancelled primary side PICkit 4 bootloading pre-program, aborting.");
+            if (_dialogResult == DialogResult.Cancel) throw new TestAbortException("Operator cancelled primary side PICkit 4 bootloading pre-program, aborting.");
             P00200(test, instruments);
             // TODO: launch MPLAB IPE programmatically, with a script.
 
-            // If IPE returns unsuccessfully, throw an ABTAbortException();
+            // If IPE returns unsuccessfully, throw an TestAbortException();
             // If not, close MPLAB IPE programmatically.
             E3610xB.Off(instruments[Instrument.POWER_SECONDARY]);
             _dialogResult = MessageBox.Show($"Disconnect PICkit 4 IC programmer from isoMicro UUT.{Environment.NewLine}{Environment.NewLine}" +
                 $"Press OK when completed, Cancel to cancel.", "Disconnect PICkit 4", MessageBoxButtons.OKCancel);
-            if (_dialogResult == DialogResult.Cancel) throw new ABTAbortException("Operator cancelled primary side PICkit 4 bootloading post-program, aborting.");
+            if (_dialogResult == DialogResult.Cancel) throw new TestAbortException("Operator cancelled primary side PICkit 4 bootloading post-program, aborting.");
             return P00200(test, instruments);
         }
         internal static String P00401(Test test, Dictionary<String, Instrument> instruments) {
