@@ -10,7 +10,7 @@ using TIDP.SAA; // https://www.ti.com/tool/FUSION_USB_ADAPTER_API/
 
 namespace isoMicro {
     internal class isoMicroForm : TestForm {
-        internal isoMicroForm(String assemblyName, String assemblyVersion) : base(assemblyName, assemblyVersion) { }
+        internal isoMicroForm() : base() { }
 
         protected override String RunTest(Test test, Dictionary<String, Instrument> instruments) {
             // https://stackoverflow.com/questions/540066/calling-a-function-from-a-string-in-c-sharp
