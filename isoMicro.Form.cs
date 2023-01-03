@@ -25,6 +25,14 @@ namespace isoMicro {
             return (String)methodInfo.Invoke(this, new object[] { test, instruments });
         }
 
+        internal static String P10300(Test test, Dictionary<String, Instrument> instruments) {
+            return "0.05";
+        }
+
+        internal static String P10301(Test test, Dictionary<String, Instrument> instruments) {
+            return "6.0";
+        }
+
         internal static void EnableNLow() {
             // TODO: Assume EnableN signal driven by the Wave Generator connected through a USB-ERB24 relay.
             // KS33509B.ApplyDC(base.Instruments[Instrument.WAVE_GENERATOR], 3.3);
