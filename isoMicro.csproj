@@ -51,13 +51,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>isoMicro.isoMicro</StartupObject>
+    <StartupObject>isoMicro.isoMicroMain</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="isoMicro.Form.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="isoMicro.Main.cs" />
+    <Compile Include="IsoMicro.Shared.cs" />
     <Compile Include="isoMicro.T30.cs" />
     <Compile Include="isoMicro.T50.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

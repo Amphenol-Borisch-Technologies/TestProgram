@@ -6,24 +6,18 @@ using ABTTestLibrary.Config;
 using ABTTestLibrary.Instruments;
 using ABTTestLibrary.Instruments.Keysight;
 using ABTTestLibrary.TestSupport;
-using isoMicro;
 
-//  Test Procedure requires a voltage ramp up between 1V/µSecond through 0.5V/mSecond
-//   for its VIN, Primary & Secondary Bias power supplies, powered respectively to 12.5, 6.25 & 6.25 V.
-// - The VIN power supply is a Keysight E36234A, which specifies 50 milliSecond up/down programming settling to
-//   within 1% of total excursion.
-// - The Primary & Secondary Bias power supplies are both Keysight E36103Bs, which specify 50 milliSecond
-//   up/down programming settling to within 1% of total excursion.
-// - Doing the arithmetic:
-//   - 12.5V ÷ 0.050S = 0.252V/mS.
-//   - 6.25V ÷ 0.050S = 0.125V/mS.
-// - 0.252V/mS and 0.125V/mS both lie within required voltage ramp up rate between 1V/µSecond through 0.5V/mSecond.
+// Place all Test methods, convenience methods & classes solely exclusive to Group T30 in this file.
+// Do not place them in any other file, as Tests should be unique to a Program the and methods & classes must be unique within a namespace.
+// - Examples:
+//      If Test01 belongs to both Groups T30 & T50, place it in IsoMicro.Shared.cs.
+//      If Test02 belongs exclusively to Group T30, place it in this file.
+//      If Test03 belongs to both Groups T50, GroupCustom1 & GroupCustom2, place it in IsoMicro.Shared.cs.
+//      RunTestMethod is common to both Groups T30 & T50, so is placed in IsoMicro.Shared.cs.
 namespace isoMicro {
-    internal static class T30 {
-        private static DialogResult _dialogResult;
-
+    internal sealed partial class isoMicroTests {
         internal static String P00100(Test test, Dictionary<String, Instrument> instruments) {
-            isoMicroForm.EnableNLowHigh();
+            EnableNLowHigh();
             (Double _, Double A) = E3610xB.MeasureVA(instruments[Instrument.POWER_PRIMARY]);
             E3610xB.Off(instruments[Instrument.POWER_PRIMARY]);
             return A.ToString();

@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace isoMicro {
-    internal partial class isoMicro {
+    internal class isoMicroMain {
         [STAThread]
         static void Main() {
             Application.EnableVisualStyles();
