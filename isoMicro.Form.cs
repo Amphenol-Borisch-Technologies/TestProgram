@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms.PropertyGridInternal;
 using ABTTestLibrary;
 using ABTTestLibrary.Config;
 using ABTTestLibrary.Instruments;
 
 namespace isoMicro {
-    internal class isoMicroForm : TestForm {
-        internal isoMicroForm() : base() { }
+    internal sealed class isoMicroForm : TestForm {
+        internal isoMicroForm() : base() {
+            this.Icon = Properties.Resources.RaytheonR;
+        }
 
         protected override String RunTest(Test test, Dictionary<String, Instrument> instruments) {
             // https://stackoverflow.com/questions/540066/calling-a-function-from-a-string-in-c-sharp
@@ -14,8 +17,8 @@ namespace isoMicro {
             // Override TestForm's abstract RunTest() method.  Necessary because implementing RunTest()
             // in ABTTestLibrary's RunTest() method would necessiate in having a reference to this
             // client Test project, and we don't want that.
-            //  - We instead want this client Test project to reference the ABTTEstLibray, and ABTTestLibary
-            //    to be blissfully ignorant of this client Test project.
+            //  - We instead want this client Test project to reference the ABTTEstLibray, but ABTTestLibary
+            //    be blissfully ignorant of this client Test project.
             //  - Use Reflection's MethodInfo.Invoke to invoke the correct test method.
             //  - This is performed in the isoMicro.Shared.cs file, in partial class IsoMicroTests,
             //    method RunTestMethod.

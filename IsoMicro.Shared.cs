@@ -32,11 +32,16 @@ namespace isoMicro {
         public static String RunTestMethod(Test test, Dictionary<String, Instrument> instruments) {
             // https://stackoverflow.com/questions/540066/calling-a-function-from-a-string-in-c-sharp
             // https://www.codeproject.com/Articles/19911/Dynamically-Invoke-A-Method-Given-Strings-with-Met
-            // Override TestForm's abstract RunTest() method.  Necessary because implementing RunTest()
+            // Indirectly override TestForm's abstract RunTest() method.  Necessary because implementing RunTest()
             // in ABTTestLibrary's RunTest() method would necessiate in having a reference to this
             // client Test project, and we don't want that.
             // We instead want this client Test project to reference the ABTTEstLibray, and ABTTestLibary
             // to be blissfully ignorant of this client Test project.
+            // TODO: Obsolete this method, by invoking Test methods via Reflection across classes,
+            // originating from isoMicro.Form.cs method RunTest() instead of delegating to this
+            // RunTestMethod().  Thoughts below.
+            // https://stackoverflow.com/questions/34523717/how-to-get-namespace-class-methods-and-its-arguments-with-reflection
+            // https://stackoverflow.com/questions/79693/getting-all-types-in-a-namespace-via-reflection
             _type = typeof(isoMicroTests);
             _methodInfo = _type.GetMethod(test.ID, BindingFlags.Static | BindingFlags.NonPublic);
             return (String)_methodInfo.Invoke(null, new object[] { test, instruments });
