@@ -7,6 +7,7 @@ using ABTTestLibrary.Instruments;
 namespace isoMicro {
     internal sealed class isoMicroForm : TestForm {
         internal isoMicroForm() : base() {
+            // https://stackoverflow.com/questions/40933304/how-to-create-an-icon-for-visual-studio-with-just-mspaint-and-visual-studio
             this.Icon = Properties.Resources.RaytheonR;
         }
 
