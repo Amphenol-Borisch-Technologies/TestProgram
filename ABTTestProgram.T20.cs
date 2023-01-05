@@ -22,7 +22,7 @@ namespace ABTTestProgram {
             return _CRCsPostCalibration;
         }
 
-        internal static String T8(Test test, Dictionary<String, Instrument> instruments) {
+        internal static String T8(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             if (GetCRCsPreCalibration() != _CRCsPreCalibration) return EventCodes.FAIL;
             // Program calibration info into Flash.  Implementation unspecified :-)
             if (GetCRCsPostCalibration() == _CRCsPostCalibration) return EventCodes.FAIL;

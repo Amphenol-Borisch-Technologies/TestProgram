@@ -25,7 +25,7 @@ namespace ABTTestProgram {
             //  - It's not performed here because this TestForm class would then have to be extended
             //    to the multiple Tests files comprising partial class ABTTests, which would
             //    not be pretty.
-            return ABTTests.RunTestMethod(test, instruments);
+            return ABTTests.RunTestMethod(test, instruments, this);
         }
     }
 }

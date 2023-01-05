@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 using ABTTestLibrary;
 using ABTTestLibrary.Config;
@@ -18,7 +19,7 @@ namespace ABTTestProgram {
         private static (Int32 U6, Int32 U7) _CRCsPreCalibration = (U6: 0x050C, U7: 0x05FE);
         static ABTTests() { }
 
-        public static String RunTestMethod(Test test, Dictionary<String, Instrument> instruments) {
+        public static String RunTestMethod(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // https://stackoverflow.com/questions/540066/calling-a-function-from-a-string-in-c-sharp
             // https://www.codeproject.com/Articles/19911/Dynamically-Invoke-A-Method-Given-Strings-with-Met
             // Indirectly override TestForm's abstract RunTest() method.  Necessary because implementing RunTest()
@@ -33,49 +34,61 @@ namespace ABTTestProgram {
             // https://stackoverflow.com/questions/79693/getting-all-types-in-a-namespace-via-reflection
             _type = typeof(ABTTests);
             _methodInfo = _type.GetMethod(test.ID, BindingFlags.Static | BindingFlags.NonPublic);
-            return (String)_methodInfo.Invoke(null, new object[] { test, instruments });
+            return (String)_methodInfo.Invoke(null, new object[] { test, instruments, abtForm });
         }
 
         private static (Int32 U6, Int32 U7) GetCRCsPreCalibration() {
             return _CRCsPreCalibration;
         }
 
-        internal static String T0(Test test, Dictionary<String, Instrument> instruments) {
+        internal static String T0(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
             return "63";
         }
 
-        internal static String T1(Test test, Dictionary<String, Instrument> instruments) {
+        internal static String T1(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
             return "5.12";
         }
 
-        internal static String T2(Test test, Dictionary<String, Instrument> instruments) {
+        internal static String T2(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
             return "3.29";
         }
 
-        internal static String T3(Test test, Dictionary<String, Instrument> instruments) {
+        internal static String T3(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
+            for (Int32 i = 0; i < 500; i++) {
+                Thread.Sleep(1);
+                Application.DoEvents();
+                // Sleep for 5 seconds so STOP button can be tested.
+            }
             return "0.9";
         }
 
-        internal static String T4(Test test, Dictionary<String, Instrument> instruments) {
+        internal static String T4(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
             return "2.5";
         }
 
-        internal static String T5(Test test, Dictionary<String, Instrument> instruments) {
+        internal static String T5(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
+            abtForm.StopDisable();
+            for (Int32 i = 0; i < 500; i++) {
+                Thread.Sleep(1);
+                Application.DoEvents();
+                // Sleep for 5 seconds so StopDisable() can be tested.
+            }
+            abtForm.StopEnable();
             return "1.75";
         }
 
-        internal static String T6(Test test, Dictionary<String, Instrument> instruments) {
+        internal static String T6(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
             return "1.0001E7";
         }
 
-        internal static String T9(Test test, Dictionary<String, Instrument> instruments) {
+        internal static String T9(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
             return EventCodes.PASS; // UUT is happy!
         }
