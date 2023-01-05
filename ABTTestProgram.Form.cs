@@ -4,9 +4,9 @@ using ABTTestLibrary;
 using ABTTestLibrary.Config;
 using ABTTestLibrary.Instruments;
 
-namespace isoMicro {
-    internal sealed class isoMicroForm : TestForm {
-        internal isoMicroForm() : base(Properties.Resources.Raytheon) {
+namespace ABTTestProgram {
+    internal sealed class ABTForm : TestForm {
+        internal ABTForm() : base(Properties.Resources.Amphenol) {
             // NOTE: Change base constructor's Icon as applicable, depending on customer.
             // https://stackoverflow.com/questions/40933304/how-to-create-an-icon-for-visual-studio-with-just-mspaint-and-visual-studio
         }
@@ -20,12 +20,12 @@ namespace isoMicro {
             //  - We instead want this client Test project to reference the ABTTEstLibray, but ABTTestLibary
             //    be blissfully ignorant of this client Test project.
             //  - Use Reflection's MethodInfo.Invoke to invoke the correct test method.
-            //  - This is performed in the isoMicro.Shared.cs file, in partial class IsoMicroTests,
+            //  - This is performed in the ABTTestProgram.Shared.cs file, in partial class ABTTests,
             //    method RunTestMethod.
             //  - It's not performed here because this TestForm class would then have to be extended
-            //    to the multiple Tests files comprising partial class isoMicroTests, which would
+            //    to the multiple Tests files comprising partial class ABTTests, which would
             //    not be pretty.
-            return isoMicroTests.RunTestMethod(test, instruments);
+            return ABTTests.RunTestMethod(test, instruments);
         }
     }
 }

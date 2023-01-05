@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("isoMicro")]
-[assembly: AssemblyDescription("Raytheon D4522137-2 Functional Test")]
+[assembly: AssemblyTitle("ABTTestProgram")]
+[assembly: AssemblyDescription("ABT Functional Base Test Program")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Amphenol Borisch Technologies")]
-[assembly: AssemblyProduct("isoMicro")]
+[assembly: AssemblyProduct("ABTTestProgram")]
 [assembly: AssemblyCopyright("Copyright © Amphenol Borisch Technologies 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

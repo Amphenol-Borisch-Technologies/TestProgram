@@ -11,12 +11,12 @@ using ABTTestLibrary.TestSupport;
 // Do not place them in any other file, as Tests should be unique to a Program the and methods & classes
 // must be unique within a namespace.
 // - Examples:
-//      If Test01 belongs to both Groups T30 & T50, place it in isoMicro.Shared.cs.
+//      If Test01 belongs to both Groups T30 & T50, place it in ABTTestProgram.Shared.cs.
 //      If Test02 belongs exclusively to Group T50, place it in this file.
-//      If Test03 belongs to both Groups T50, GroupCustom1 & GroupCustom2, place it in isoMicro.Shared.cs.
-//      RunTestMethod is common to both Groups T30 & T50, so is placed in isoMicro.Shared.cs.
-namespace isoMicro {
-    internal sealed partial class isoMicroTests {
+//      If Test03 belongs to both Groups T50, GroupCustom1 & GroupCustom2, place it in ABTTestProgram.Shared.cs.
+//      RunTestMethod is common to both Groups T30 & T50, so is placed in ABTTestProgram.Shared.cs.
+namespace ABTTestProgram {
+    internal sealed partial class ABTTests {
         internal static String P10300(Test test, Dictionary<String, Instrument> instruments) {
             return "6.25";
         }

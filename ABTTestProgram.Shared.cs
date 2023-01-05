@@ -11,23 +11,13 @@ using TIDP.SAA; // https://www.ti.com/tool/FUSION_USB_ADAPTER_API/
 // Place all Test methods, convenience methods & classes, comments applicable to multiple Groups in this file.
 // Do not place them in any other file, as methods & classes must be unique within a namespace.
 //
-//  isoMicro's 0001624557, Draft A Test Specification requires a voltage ramp up between 1V/µSecond through 0.5V/mSecond
-//   for its VIN, Primary & Secondary Bias power supplies, powered respectively to 12.5, 6.25 & 6.25 V.
-// - The VIN power supply is a Keysight E36234A, which specifies 50 milliSecond up/down programming settling to
-//   within 1% of total excursion.
-// - The Primary & Secondary Bias power supplies are both Keysight E36103Bs, which specify 50 milliSecond
-//   up/down programming settling to within 1% of total excursion.
-// - Doing the arithmetic:
-//   - 12.5V ÷ 0.050S = 0.252V/mS.
-//   - 6.25V ÷ 0.050S = 0.125V/mS.
-// - 0.252V/mS and 0.125V/mS both lie within required voltage ramp up rate between 1V/µSecond through 0.5V/mSecond.
-namespace isoMicro {
-    internal sealed partial class isoMicroTests {
+namespace ABTTestProgram {
+    internal sealed partial class ABTTests {
         private static DialogResult _dialogResult;
         private static Type _type;
         private static MethodInfo _methodInfo;
 
-        static isoMicroTests() { }
+        static ABTTests() { }
 
         public static String RunTestMethod(Test test, Dictionary<String, Instrument> instruments) {
             // https://stackoverflow.com/questions/540066/calling-a-function-from-a-string-in-c-sharp
@@ -38,11 +28,11 @@ namespace isoMicro {
             // We instead want this client Test project to reference the ABTTEstLibray, and ABTTestLibary
             // to be blissfully ignorant of this client Test project.
             // TODO: Obsolete this method, by invoking Test methods via Reflection across classes,
-            // originating from isoMicro.Form.cs method RunTest() instead of delegating to this
+            // originating from ABTTestProgram.Form.cs method RunTest() instead of delegating to this
             // RunTestMethod().  Thoughts below.
             // https://stackoverflow.com/questions/34523717/how-to-get-namespace-class-methods-and-its-arguments-with-reflection
             // https://stackoverflow.com/questions/79693/getting-all-types-in-a-namespace-via-reflection
-            _type = typeof(isoMicroTests);
+            _type = typeof(ABTTests);
             _methodInfo = _type.GetMethod(test.ID, BindingFlags.Static | BindingFlags.NonPublic);
             return (String)_methodInfo.Invoke(null, new object[] { test, instruments });
         }
