@@ -41,54 +41,54 @@ namespace ABTTestProgram {
             return _CRCsPreCalibration;
         }
 
-        internal static String T0(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T00(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
             return "63";
         }
 
-        internal static String T1(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T01(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
             return "5.12";
         }
 
-        internal static String T2(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T02(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
             return "3.29";
         }
 
-        internal static String T3(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T03(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
             for (Int32 i = 0; i < 500; i++) {
                 Thread.Sleep(1);
                 Application.DoEvents();
-                // Sleep for 5 seconds so STOP button can be tested.
+                // Sleep so STOP button can be tested.
             }
             return "0.9";
         }
 
-        internal static String T4(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T04(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
             return "2.5";
         }
 
-        internal static String T5(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T05(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
             abtForm.StopDisable();
             for (Int32 i = 0; i < 500; i++) {
                 Thread.Sleep(1);
                 Application.DoEvents();
-                // Sleep for 5 seconds so StopDisable() can be tested.
+                // Sleep so StopDisable() can be tested.
             }
             abtForm.StopEnable();
             return "1.75";
         }
 
-        internal static String T6(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T06(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
             return "1.0001E7";
         }
 
-        internal static String T9(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T09(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
             // Implementation unspecified :-)
             return EventCodes.PASS; // UUT is happy!
         }

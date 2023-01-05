@@ -62,8 +62,8 @@
     </Compile>
     <Compile Include="ABTTestProgram.Main.cs" />
     <Compile Include="ABTTestProgram.Shared.cs" />
-    <Compile Include="ABTTestProgram.T10.cs" />
-    <Compile Include="ABTTestProgram.T20.cs" />
+    <Compile Include="ABTTestProgram.T-10.cs" />
+    <Compile Include="ABTTestProgram.T-20.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ABTTestProgram.Designer.cs">
       <AutoGen>True</AutoGen>
