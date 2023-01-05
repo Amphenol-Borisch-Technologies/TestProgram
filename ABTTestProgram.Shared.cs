@@ -6,7 +6,6 @@ using ABTTestLibrary;
 using ABTTestLibrary.Config;
 using ABTTestLibrary.Instruments;
 using ABTTestLibrary.TestSupport;
-using TIDP.SAA; // https://www.ti.com/tool/FUSION_USB_ADAPTER_API/
 
 // Place all Test methods, convenience methods & classes, comments applicable to multiple Groups in this file.
 // Do not place them in any other file, as methods & classes must be unique within a namespace.
@@ -16,7 +15,7 @@ namespace ABTTestProgram {
         private static DialogResult _dialogResult;
         private static Type _type;
         private static MethodInfo _methodInfo;
-
+        private static (Int32 U6, Int32 U7) _CRCsPreCalibration = (U6: 0x050C, U7: 0x05FE);
         static ABTTests() { }
 
         public static String RunTestMethod(Test test, Dictionary<String, Instrument> instruments) {
@@ -25,7 +24,7 @@ namespace ABTTestProgram {
             // Indirectly override TestForm's abstract RunTest() method.  Necessary because implementing RunTest()
             // in ABTTestLibrary's RunTest() method would necessiate in having a reference to this
             // client Test project, and we don't want that.
-            // We instead want this client Test project to reference the ABTTEstLibray, and ABTTestLibary
+            // We instead want this client Test project to reference the ABTTestLibray, and ABTTestLibary
             // to be blissfully ignorant of this client Test project.
             // TODO: Obsolete this method, by invoking Test methods via Reflection across classes,
             // originating from ABTTestProgram.Form.cs method RunTest() instead of delegating to this
@@ -37,48 +36,48 @@ namespace ABTTestProgram {
             return (String)_methodInfo.Invoke(null, new object[] { test, instruments });
         }
 
-        internal static void EnableNLow() {
-            // TODO: Assume EnableN signal driven by the Wave Generator connected through a USB-ERB24 relay.
-            // KS33509B.ApplyDC(base.Instruments[Instrument.WAVE_GENERATOR], 3.3);
+        private static (Int32 U6, Int32 U7) GetCRCsPreCalibration() {
+            return _CRCsPreCalibration;
         }
 
-        internal static void EnableNHigh() {
-            // TODO: Assume EnableN signal driven by the Wave Generator connected through a USB-ERB24 relay.
-            // KS33509B.SetOutputOff(base.Instruments[Instrument.WAVE_GENERATOR]);
+        internal static String T0(Test test, Dictionary<String, Instrument> instruments) {
+            // Implementation unspecified :-)
+            return "63";
         }
 
-        internal static void EnableNLowHigh() {
-            EnableNLow();
-            EnableNHigh();
+        internal static String T1(Test test, Dictionary<String, Instrument> instruments) {
+            // Implementation unspecified :-)
+            return "5.12";
         }
-    }
 
-    internal static class SMBA {
-        // NOTE: Update to .Net 7.0 & C# 11.0 if possible.  See 2nd Note below.
-        // - Used .Net FrameWork 4.8 instead of .Net 7.0 because required Texas Instruments' TIDP.SAA Fusion Library targets
-        //   .Net FrameWork 2.0, incompatible with .Net 7.0, C# 11.0 & UWP.
-        // https://www.ti.com/tool/FUSION_USB_ADAPTER_API
-        // NOTE: Microsoft supports I2C with their Windows.Devices.I2c & System.Device.I2c Namespaces:
-        // - Conceivable above TI's TIDP.SAA Fusion Library could be replaced by these Namespaces, though they'd need
-        //   to communicate with a GPIO adapter capable of interfacing to the customer's UUT.
-        // - https://learn.microsoft.com/en-us/uwp/api/windows.devices.i2c?view=winrt-22621
-        // - https://learn.microsoft.com/en-us/dotnet/api/system.device.i2c?view=iot-dotnet-latest
-        // - https://github.com/Microsoft/Windows-universal-samples/tree/main/Samples/IoT-I2C
-        // - Texas Instruments has 2 USB-TO-GPIO adapters, and there are others, so potentially doable.
-        // - Migrating from TI's TIDP.SAA to Microsoft's Windows.Devices.I2c & System.Device.I2c would also
-        //   allow migration from .Net FrameWork 4.8, C# 7.3 & WinForms to .Net 7.0, C# 11.0 & UWP.
-        // - Would require OS to be Windows Enterprise IoT 10 or 11, but that's eminently doable.
-        // - https://www.ti.com/tool/USB-TO-GPIO, © 2006
-        // - https://www.ti.com/tool/USB-TO-GPIO2, © 2022
-        internal static String SMBusAddress = System.Configuration.ConfigurationManager.AppSettings["CUSTOM_SMBusAddress"];
-        internal static SMBusAdapter Get() {
-            if (SMBusAdapter.Discover() == 0) throw new Exception("No 'USB Interface Adapter, Texas Instruments © 2006' found!");
-            SMBusAdapter smba = SMBusAdapter.Adapter;
-            smba.Set_Bus_Speed(SMBusAdapter.BusSpeed.Speed400KHz);
-            smba.Set_PEC_Enabled(true);
-            smba.Set_Pull_Ups(SMBusAdapter.ResistorValue.Ohm22k, SMBusAdapter.ResistorValue.Ohm22k, SMBusAdapter.ResistorValue.Ohm22k);
-            smba.Set_Parallel_Mode(false);
-            return smba;
+        internal static String T2(Test test, Dictionary<String, Instrument> instruments) {
+            // Implementation unspecified :-)
+            return "3.29";
+        }
+
+        internal static String T3(Test test, Dictionary<String, Instrument> instruments) {
+            // Implementation unspecified :-)
+            return "0.9";
+        }
+
+        internal static String T4(Test test, Dictionary<String, Instrument> instruments) {
+            // Implementation unspecified :-)
+            return "2.5";
+        }
+
+        internal static String T5(Test test, Dictionary<String, Instrument> instruments) {
+            // Implementation unspecified :-)
+            return "1.75";
+        }
+
+        internal static String T6(Test test, Dictionary<String, Instrument> instruments) {
+            // Implementation unspecified :-)
+            return "1.0001E7";
+        }
+
+        internal static String T8(Test test, Dictionary<String, Instrument> instruments) {
+            // Implementation unspecified :-)
+            return EventCodes.PASS; // UUT is happy!
         }
     }
 }
