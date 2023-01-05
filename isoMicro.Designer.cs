@@ -63,9 +63,9 @@ namespace isoMicro {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        public static System.Drawing.Icon RaytheonR {
+        public static System.Drawing.Icon Raytheon {
             get {
-                object obj = ResourceManager.GetObject("RaytheonR", resourceCulture);
+                object obj = ResourceManager.GetObject("Raytheon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

@@ -8,9 +8,9 @@ using ABTTestLibrary.Instruments;
 using ABTTestLibrary.TestSupport;
 using TIDP.SAA; // https://www.ti.com/tool/FUSION_USB_ADAPTER_API/
 
-// Place all Test methods, convenience methods & classes shared between multiple Groups in this file.
+// Place all Test methods, convenience methods & classes, comments applicable to multiple Groups in this file.
 // Do not place them in any other file, as methods & classes must be unique within a namespace.
-
+//
 //  isoMicro's 0001624557, Draft A Test Specification requires a voltage ramp up between 1V/µSecond through 0.5V/mSecond
 //   for its VIN, Primary & Secondary Bias power supplies, powered respectively to 12.5, 6.25 & 6.25 V.
 // - The VIN power supply is a Keysight E36234A, which specifies 50 milliSecond up/down programming settling to

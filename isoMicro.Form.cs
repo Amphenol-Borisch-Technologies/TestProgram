@@ -6,9 +6,9 @@ using ABTTestLibrary.Instruments;
 
 namespace isoMicro {
     internal sealed class isoMicroForm : TestForm {
-        internal isoMicroForm() : base() {
+        internal isoMicroForm() : base(Properties.Resources.Raytheon) {
+            // NOTE: Change base constructor's Icon as applicable, depending on customer.
             // https://stackoverflow.com/questions/40933304/how-to-create-an-icon-for-visual-studio-with-just-mspaint-and-visual-studio
-            this.Icon = Properties.Resources.RaytheonR;
         }
 
         protected override String RunTest(Test test, Dictionary<String, Instrument> instruments) {

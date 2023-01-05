@@ -7,8 +7,9 @@ using ABTTestLibrary.Instruments;
 using ABTTestLibrary.Instruments.Keysight;
 using ABTTestLibrary.TestSupport;
 
-// Place all Test methods, convenience methods & classes solely exclusive to Group T30 in this file.
-// Do not place them in any other file, as Tests should be unique to a Program the and methods & classes must be unique within a namespace.
+// Place all Test methods, convenience methods, classes & comments solely exclusive to Group T30 in this file.
+// Do not place them in any other file, as Tests should be unique to a Program the and methods & classes
+// must be unique within a namespace.
 // - Examples:
 //      If Test01 belongs to both Groups T30 & T50, place it in isoMicro.Shared.cs.
 //      If Test02 belongs exclusively to Group T30, place it in this file.

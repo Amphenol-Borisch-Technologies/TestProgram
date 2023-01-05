@@ -63,9 +63,49 @@ namespace isoMicro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon RaytheonR {
+        internal static System.Drawing.Icon Amphenol {
             get {
-                object obj = ResourceManager.GetObject("RaytheonR", resourceCulture);
+                object obj = ResourceManager.GetObject("Amphenol", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon GeneralDynamics {
+            get {
+                object obj = ResourceManager.GetObject("GeneralDynamics", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon L3H {
+            get {
+                object obj = ResourceManager.GetObject("L3H", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon Rafael {
+            get {
+                object obj = ResourceManager.GetObject("Rafael", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon Raytheon {
+            get {
+                object obj = ResourceManager.GetObject("Raytheon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
