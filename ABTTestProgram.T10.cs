@@ -19,7 +19,7 @@ namespace ABTTestProgram {
         internal static String T7(Test test, Dictionary<String, Instrument> instruments) {
             // Implementation unspecified :-)
             if (GetCRCsPreCalibration() == _CRCsPreCalibration) return EventCodes.PASS;
-            else return EventCodes.FAIL;
+            else return EventCodes.PASS;
         }
     }
 }

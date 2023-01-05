@@ -75,7 +75,7 @@ namespace ABTTestProgram {
             return "1.0001E7";
         }
 
-        internal static String T8(Test test, Dictionary<String, Instrument> instruments) {
+        internal static String T9(Test test, Dictionary<String, Instrument> instruments) {
             // Implementation unspecified :-)
             return EventCodes.PASS; // UUT is happy!
         }
