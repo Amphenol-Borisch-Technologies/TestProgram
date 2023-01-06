@@ -7,7 +7,7 @@ namespace ABTTestProgram {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ABTForm());
+            Application.Run(new ProgramForm());
         }
     }
 }

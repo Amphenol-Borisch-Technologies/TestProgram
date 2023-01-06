@@ -16,16 +16,16 @@ using ABTTestLibrary.TestSupport;
 //      RunTestMethod is common to both Groups T-10 & T-20, so is placed in ABTTestProgram.Shared.cs.
 namespace ABTTestProgram {
     internal sealed partial class ABTTests {
-        private static (Int32 U6, Int32 U7) _CRCsPostCalibration = (U6: 0xABCD, U7: 0xEF01);
+        private static Int32 _U6_CRC_PostCalibration = 0xABCD;
 
-        private static (Int32 U6, Int32 U7) GetCRCsPostCalibration() {
-            return _CRCsPostCalibration;
+        private static Int32 GetU6_CRC_PostCalibration() {
+            return _U6_CRC_PostCalibration;
         }
 
-        internal static String T08(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
-            if (GetCRCsPreCalibration() != _CRCsPreCalibration) return EventCodes.FAIL;
+        internal static String T08(Test test, Dictionary<String, Instrument> instruments, ProgramForm abtForm) {
+            if (GetU6_CRC_PreCalibration() != _U6_CRC_PreCalibration) return EventCodes.FAIL;
             // Program calibration info into Flash.  Implementation unspecified :-)
-            if (GetCRCsPostCalibration() == _CRCsPostCalibration) return EventCodes.FAIL;
+            if (GetU6_CRC_PostCalibration() == _U6_CRC_PostCalibration) return EventCodes.FAIL;
             // Deliberate FAIL, to demonstrate failing Test run.
             else return EventCodes.PASS;
         }

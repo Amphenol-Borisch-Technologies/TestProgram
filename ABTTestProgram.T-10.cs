@@ -16,9 +16,9 @@ using ABTTestLibrary.TestSupport;
 //      RunTestMethod is common to both Groups T-10 & T-20, so is placed in ABTTestProgram.Shared.cs.
 namespace ABTTestProgram {
     internal sealed partial class ABTTests {
-        internal static String T07(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T07(Test test, Dictionary<String, Instrument> instruments, ProgramForm abtForm) {
             // Implementation unspecified :-)
-            if (GetCRCsPreCalibration() == _CRCsPreCalibration) return EventCodes.PASS;
+            if (GetU6_CRC_PreCalibration() == _U6_CRC_PostCalibration) return EventCodes.PASS;
             else return EventCodes.PASS;
         }
     }

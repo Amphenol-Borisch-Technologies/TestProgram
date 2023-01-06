@@ -5,8 +5,8 @@ using ABTTestLibrary.Config;
 using ABTTestLibrary.Instruments;
 
 namespace ABTTestProgram {
-    internal sealed class ABTForm : TestForm {
-        internal ABTForm() : base(Properties.Resources.Amphenol) {
+    internal sealed class ProgramForm : LibraryForm {
+        internal ProgramForm() : base(Properties.Resources.Amphenol) {
             // NOTE: Change base constructor's Icon as applicable, depending on customer.
             // https://stackoverflow.com/questions/40933304/how-to-create-an-icon-for-visual-studio-with-just-mspaint-and-visual-studio
         }

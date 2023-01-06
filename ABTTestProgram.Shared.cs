@@ -16,10 +16,10 @@ namespace ABTTestProgram {
         private static DialogResult _dialogResult;
         private static Type _type;
         private static MethodInfo _methodInfo;
-        private static (Int32 U6, Int32 U7) _CRCsPreCalibration = (U6: 0x050C, U7: 0x05FE);
+        private static Int32 _U6_CRC_PreCalibration = 0x050C;
         static ABTTests() { }
 
-        public static String RunTestMethod(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        public static String RunTestMethod(Test test, Dictionary<String, Instrument> instruments, ProgramForm abtForm) {
             // https://stackoverflow.com/questions/540066/calling-a-function-from-a-string-in-c-sharp
             // https://www.codeproject.com/Articles/19911/Dynamically-Invoke-A-Method-Given-Strings-with-Met
             // Indirectly override TestForm's abstract RunTest() method.  Necessary because implementing RunTest()
@@ -37,26 +37,26 @@ namespace ABTTestProgram {
             return (String)_methodInfo.Invoke(null, new object[] { test, instruments, abtForm });
         }
 
-        private static (Int32 U6, Int32 U7) GetCRCsPreCalibration() {
-            return _CRCsPreCalibration;
+        private static Int32 GetU6_CRC_PreCalibration() {
+            return _U6_CRC_PreCalibration;
         }
 
-        internal static String T00(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T00(Test test, Dictionary<String, Instrument> instruments, ProgramForm abtForm) {
             // Implementation unspecified :-)
             return "63";
         }
 
-        internal static String T01(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T01(Test test, Dictionary<String, Instrument> instruments, ProgramForm abtForm) {
             // Implementation unspecified :-)
             return "5.12";
         }
 
-        internal static String T02(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T02(Test test, Dictionary<String, Instrument> instruments, ProgramForm abtForm) {
             // Implementation unspecified :-)
             return "3.29";
         }
 
-        internal static String T03(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T03(Test test, Dictionary<String, Instrument> instruments, ProgramForm abtForm) {
             // Implementation unspecified :-)
             for (Int32 i = 0; i < 500; i++) {
                 Thread.Sleep(1);
@@ -66,12 +66,12 @@ namespace ABTTestProgram {
             return "0.9";
         }
 
-        internal static String T04(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T04(Test test, Dictionary<String, Instrument> instruments, ProgramForm abtForm) {
             // Implementation unspecified :-)
             return "2.5";
         }
 
-        internal static String T05(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T05(Test test, Dictionary<String, Instrument> instruments, ProgramForm abtForm) {
             // Implementation unspecified :-)
             abtForm.StopDisable();
             for (Int32 i = 0; i < 500; i++) {
@@ -83,12 +83,12 @@ namespace ABTTestProgram {
             return "1.75";
         }
 
-        internal static String T06(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T06(Test test, Dictionary<String, Instrument> instruments, ProgramForm abtForm) {
             // Implementation unspecified :-)
             return "1.0001E7";
         }
 
-        internal static String T09(Test test, Dictionary<String, Instrument> instruments, ABTForm abtForm) {
+        internal static String T09(Test test, Dictionary<String, Instrument> instruments, ProgramForm abtForm) {
             // Implementation unspecified :-)
             return EventCodes.PASS; // UUT is happy!
         }
