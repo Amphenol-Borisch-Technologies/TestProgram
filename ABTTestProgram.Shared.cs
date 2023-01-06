@@ -73,13 +73,13 @@ namespace ABTTestProgram {
 
         internal static String T05(Test test, Dictionary<String, Instrument> instruments, ProgramForm abtForm) {
             // Implementation unspecified :-)
-            abtForm.StopDisable();
+            abtForm.CancelDisable();
             for (Int32 i = 0; i < 500; i++) {
                 Thread.Sleep(1);
                 Application.DoEvents();
-                // Sleep so StopDisable() can be tested.
+                // Sleep so CancelDisable() can be tested.
             }
-            abtForm.StopEnable();
+            abtForm.CancelEnable();
             return "1.75";
         }
 
