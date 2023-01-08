@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using ABTTestLibrary;
-using ABTTestLibrary.Config;
-using ABTTestLibrary.Instruments;
+using TestLibrary;
+using TestLibrary.Config;
+using TestLibrary.Instruments;
 
-namespace ABTTestProgram {
-    internal sealed class ProgramForm : LibraryForm {
-        internal ProgramForm() : base(Properties.Resources.Amphenol) {
+namespace TestProgram {
+    internal sealed class TestProgramForm : TestLibraryForm {
+        internal TestProgramForm() : base(Properties.Resources.Amphenol) {
             // NOTE: Change base constructor's Icon as applicable, depending on customer.
             // https://stackoverflow.com/questions/40933304/how-to-create-an-icon-for-visual-studio-with-just-mspaint-and-visual-studio
         }
@@ -20,12 +20,12 @@ namespace ABTTestProgram {
             //  - We instead want this client Test project to reference the ABTTEstLibray, but ABTTestLibary
             //    be blissfully ignorant of this client Test project.
             //  - Use Reflection's MethodInfo.Invoke to invoke the correct test method.
-            //  - This is performed in the ABTTestProgram.Shared.cs file, in partial class ABTTests,
+            //  - This is performed in the ABTTestProgram.Shared.cs file, in partial class TestProgramTests,
             //    method RunTestMethod.
             //  - It's not performed here because this TestForm class would then have to be extended
-            //    to the multiple Tests files comprising partial class ABTTests, which would
+            //    to the multiple Tests files comprising partial class TestProgramTests, which would
             //    not be pretty.
-            return ABTTests.RunTestMethod(test, instruments, this);
+            return TestProgramTests.RunTestMethod(test, instruments);
         }
     }
 }

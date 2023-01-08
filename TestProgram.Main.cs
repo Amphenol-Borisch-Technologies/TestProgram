@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ABTTestProgram {
-    internal class ABTMain {
+namespace TestProgram {
+    internal class TestProgramMain {
         [STAThread]
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ProgramForm());
+            Application.Run(new TestProgramForm());
         }
     }
 }
