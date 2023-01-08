@@ -130,7 +130,7 @@
     <None Include="Resources\Raytheon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ABTTestLibrary\TestLibrary.csproj">
+    <ProjectReference Include="..\TestLibrary\TestLibrary.csproj">
       <Project>{314614cb-6e17-4b74-a9f9-ce4699f78c9b}</Project>
       <Name>TestLibrary</Name>
     </ProjectReference>
