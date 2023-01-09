@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using TestLibrary;
 using TestLibrary.Config;
 using TestLibrary.Instruments;
@@ -16,7 +17,7 @@ using TestLibrary.TestSupport;
 //      RunTestMethod is common to both Groups T-10 & T-20, so is placed in TestProgram.Shared.cs.
 namespace TestProgram {
     internal sealed partial class TestProgramTests {
-        internal static String T07(Test test, Dictionary<String, Instrument> instruments) {
+        internal static String T07(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
             // Implementation unspecified :-)
             if (GetU6_CRC_PreCalibration() == _U6_CRC_PostCalibration) return EventCodes.PASS;
             else return EventCodes.PASS;

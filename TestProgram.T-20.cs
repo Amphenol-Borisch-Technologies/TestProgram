@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using TestLibrary;
 using TestLibrary.Config;
 using TestLibrary.Instruments;
@@ -22,7 +23,7 @@ namespace TestProgram {
             return _U6_CRC_PostCalibration;
         }
 
-        internal static String T08(Test test, Dictionary<String, Instrument> instruments) {
+        internal static String T08(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
             if (GetU6_CRC_PreCalibration() != _U6_CRC_PreCalibration) return EventCodes.FAIL;
             // Program calibration info into Flash.  Implementation unspecified :-)
             if (GetU6_CRC_PostCalibration() == _U6_CRC_PostCalibration) return EventCodes.FAIL;
