@@ -10,7 +10,6 @@ using TestLibrary.TestSupport;
 
 // Place all Test methods, convenience methods & classes, comments applicable to multiple Groups in this file.
 // Do not place them in any other file, as methods & classes must be unique within a namespace.
-//
 namespace TestProgram {
     internal sealed partial class TestProgramTests {
         private static DialogResult _dialogResult;
