@@ -67,14 +67,14 @@ namespace TestProgram {
         internal static String T03(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
             // Implementation unspecified :-)
             MessageBox.Show($"The next Test, '{test.ID}', executes for 10 seconds, permitting Cancellation or Emergency Stopping if desired.{Environment.NewLine}{Environment.NewLine}"
-                + $"It implements active Cancellation via Microsoft's CancellationToken.{Environment.NewLine}{Environment.NewLine}"
+                + $"It implements proactive Cancellation via Microsoft's CancellationToken.{Environment.NewLine}{Environment.NewLine}"
                 + $"Note that Cancellation occurs immediately, interrupting Test '{test.ID}'.",
                 "Cancel or Emergency Stop", MessageBoxButtons.OK, MessageBoxIcon.Information);
             for (Int32 i = 0; i < 200; i++) {
                 Thread.Sleep(50); // Sleep so Cancel or Emergency Stop buttons can be tested.
                 Application.DoEvents();
                 if (cancellationToken.IsCancellationRequested) throw new TestCancellationException($"Test '{test.ID}' Cancelled by operator request.");
-                // Above implements Microsoft's recommended CancellationTokenSource technique, in one of multiple fashions,
+                // Above implements Microsoft's proactive CancellationTokenSource technique, in one of multiple fashions,
                 // which aborts the currently executing Test if Test Operator cancels.
                 // Cancellation methods detailed at https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads.
             }
@@ -89,13 +89,15 @@ namespace TestProgram {
         internal static String T05(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
             // Implementation unspecified :-)
             MessageBox.Show($"The next Test, '{test.ID}', executes for 5 seconds, also permitting Cancellation or Emergency Stopping if desired.{Environment.NewLine}{Environment.NewLine}"
-                + $"It *does not* implement active Cancellation via Microsoft's CancellationToken{Environment.NewLine}{Environment.NewLine}."
+                + $"It *does not* implement proactive Cancellation via Microsoft's CancellationToken{Environment.NewLine}{Environment.NewLine}."
+                + $"Instead, it utilizes reactive Cancellation via TestLibrary's default 'Cancel before next Test' technique.{Environment.NewLine}{Environment.NewLine}"
                 + $"Note that Cancellation *does not* occur immediately, and '{test.ID}' runs to completion.",
                 "Cancel or Emergency Stop", MessageBoxButtons.OK, MessageBoxIcon.Information);
             for (Int32 i = 0; i < 100; i++) {
                 Thread.Sleep(50); // Sleep so Cancel or Emergency Stop buttons can be tested.
                 Application.DoEvents();
-                //  Microsoft's CancellationTokenSource technique not implemented, so TestLibrary's basic "Cancel before next Test"
+                //  Microsoft's proactive CancellationTokenSource technique not implemented, but TestLibrary's basic reactive "Cancel before next Test" is always
+                //  operational.
             }
             return "1.75";
         }
