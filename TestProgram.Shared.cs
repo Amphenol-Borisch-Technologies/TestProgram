@@ -8,8 +8,17 @@ using TestLibrary.Config;
 using TestLibrary.Instruments;
 using TestLibrary.TestSupport;
 
-// Place all Test methods, convenience methods & classes, comments applicable to multiple Groups in this file.
-// Do not place them in any other file, as methods & classes must be unique within a namespace.
+// NOTE: Place all Test methods, convenience methods & classes, comments applicable to multiple Groups in this file.
+//  - Do not place them in any other file, as methods & classes must be unique within a namespace.
+// NOTE: All Test Program's include a TestProgram.Shared.cs file, if only to contain shared RunTestMethod() and these Notes.
+// NOTE: Test Developer is responsible for ensuring Tests can be both safely & correctly called in sequence defined in App.config:
+//  - That is, if Test's execute sequentially as (T01, T02, T03, T04, T05), Test Developer is responsible for ensuring all equipment is
+//    configured safely & correctly between each Test step.
+//    - If:
+//      - T01 is unpowered Shorts & Opens testing.
+//      - T02 is powered voltage measurements.
+//      - T03 begins with unpowered operator cable connections/disconnections for In-System Programming.
+//    - Then Test Developer must ensure necessary equipment state transitions are implemented so test operator isn't plugging/unplugging a powered UUT.
 namespace TestProgram {
     internal sealed partial class TestProgramTests {
         private static DialogResult _dialogResult;
@@ -65,6 +74,9 @@ namespace TestProgram {
                 Thread.Sleep(50); // Sleep so Cancel or Emergency Stop buttons can be tested.
                 Application.DoEvents();
                 if (cancellationToken.IsCancellationRequested) throw new TestCancelException($"Test '{test.ID}' Cancelled by operator request.");
+                // Above implements Microsoft's recommended CancellationTokenSource technique, in one of multiple fashions,
+                // which aborts the currently executing Test if Test Operator cancels.
+                // Cancellation methods detailed at https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads.
             }
             return "0.9";
         }
@@ -83,6 +95,7 @@ namespace TestProgram {
             for (Int32 i = 0; i < 100; i++) {
                 Thread.Sleep(50); // Sleep so Cancel or Emergency Stop buttons can be tested.
                 Application.DoEvents();
+                //  Microsoft's CancellationTokenSource technique not implemented, so TestLibrary's basic "Cancel before next Test"
             }
             return "1.75";
         }
