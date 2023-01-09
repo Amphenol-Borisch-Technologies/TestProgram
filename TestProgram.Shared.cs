@@ -8,7 +8,7 @@ using TestLibrary.Config;
 using TestLibrary.Instruments;
 using TestLibrary.TestSupport;
 
-// NOTE: Place all Test methods, convenience methods & classes, comments applicable to multiple Groups in this file.
+// NOTE: Place all Test methods, convenience methods, classes & comments applicable to multiple Groups in this file.
 //  - Do not place them in any other file, as methods & classes must be unique within a namespace.
 // NOTE: All Test Program's include a TestProgram.Shared.cs file, if only to contain shared RunTestMethod() and these Notes.
 // NOTE: Test Developer is responsible for ensuring Tests can be both safely & correctly called in sequence defined in App.config:
@@ -76,7 +76,7 @@ namespace TestProgram {
                 if (cancellationToken.IsCancellationRequested) throw new TestCancellationException($"Test '{test.ID}' Cancelled by operator request.");
                 // Above implements Microsoft's proactive CancellationTokenSource technique, in one of multiple fashions,
                 // which aborts the currently executing Test if Test Operator cancels.
-                // Cancellation methods detailed at https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads.
+                // Multiple Cancellation methods detailed at https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads.
             }
             return "0.9";
         }
@@ -96,8 +96,8 @@ namespace TestProgram {
             for (Int32 i = 0; i < 100; i++) {
                 Thread.Sleep(50); // Sleep so Cancel or Emergency Stop buttons can be tested.
                 Application.DoEvents();
-                //  Microsoft's proactive CancellationTokenSource technique not implemented, but TestLibrary's basic reactive "Cancel before next Test" is always
-                //  operational.
+                //  Microsoft's proactive CancellationTokenSource technique not implemented, but TestLibrary's basic reactive
+                //  "Cancel before next Test" is always operational.
             }
             return "1.75";
         }
