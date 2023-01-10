@@ -10,9 +10,9 @@ using TestLibrary.TestSupport;
 
 // NOTE: Place all Test methods, convenience methods, classes & comments applicable to multiple Groups in this file.
 //  - Do not place them in any other file, as methods & classes must be unique within a namespace.
-// NOTE: All Test Program's include a TestProgram.Shared.cs file, if only to contain shared RunTestMethod() and these Notes.
+// NOTE: All Test Programs include a TestProgram.Shared.cs file, if only to contain shared RunTestMethod() and these Notes.
 // NOTE: Test Developer is responsible for ensuring Tests can be both safely & correctly called in sequence defined in App.config:
-//  - That is, if Test's execute sequentially as (T01, T02, T03, T04, T05), Test Developer is responsible for ensuring all equipment is
+//  - That is, if Tests execute sequentially as (T01, T02, T03, T04, T05), Test Developer is responsible for ensuring all equipment is
 //    configured safely & correctly between each Test step.
 //    - If:
 //      - T01 is unpowered Shorts & Opens testing.
@@ -33,7 +33,7 @@ namespace TestProgram {
             // Indirectly override TestForm's abstract RunTest() method.  Necessary because implementing RunTest()
             // in TestLibrary's RunTest() method would necessiate in having a reference to this
             // client Test project, and we don't want that.
-            // We instead want this client Test project to reference the TestLibray, and TestLibary
+            // We instead want this client Test project to reference the TestLibrary, and TestLibrary
             // to be blissfully ignorant of this client Test project.
             // TODO: Obsolete this method, by invoking Test methods via Reflection across classes,
             // originating from TestProgram.Form.cs method RunTest() instead of delegating to this
