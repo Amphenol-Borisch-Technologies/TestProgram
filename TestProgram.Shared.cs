@@ -18,7 +18,8 @@ using TestLibrary.TestSupport;
 //      - T01 is unpowered Shorts & Opens testing.
 //      - T02 is powered voltage measurements.
 //      - T03 begins with unpowered operator cable connections/disconnections for In-System Programming.
-//    - Then Test Developer must ensure necessary equipment state transitions are implemented so test operator isn't plugging/unplugging a powered UUT.
+//    - Then Test Developer must ensure necessary equipment state transitions are implemented so test operator isn't
+//      plugging/unplugging a powered UUT in T03.
 //
 //  References:
 //  - https://github.com/Amphenol-Borisch-Technologies/TestLibrary
