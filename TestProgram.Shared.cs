@@ -25,6 +25,7 @@ using TestLibrary.TestSupport;
 //  - https://github.com/Amphenol-Borisch-Technologies/TestLibrary
 //  - https://github.com/Amphenol-Borisch-Technologies/TestProgram
 //  - https://github.com/Amphenol-Borisch-Technologies/TestLibraryTests
+//
 namespace TestProgram {
     internal sealed partial class TestProgramTests {
         private static DialogResult _dialogResult;
