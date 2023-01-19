@@ -26,7 +26,7 @@ namespace TestProgram {
 
         internal static String T09(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
             TestCustomizable tc = (TestCustomizable)test.ClassObject;
-            if (String.Equals(tc.Arguments["CalibrationConstant"], "ϕ")) return EventCodes.PASS;
+            if (String.Equals(tc.Arguments["CalibrationConstant"], "ϕ", StringComparison.Ordinal)) return EventCodes.PASS;
             else return EventCodes.FAIL;
         }
 
