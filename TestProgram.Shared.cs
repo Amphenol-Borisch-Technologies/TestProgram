@@ -77,11 +77,11 @@ namespace TestProgram {
                 // which aborts the currently executing Test if Test Operator cancels.
                 // Multiple Cancellation methods detailed at https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads.
             }
-            return "0.9";
+            return "0.90";
         }
 
         internal static String T04(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
-            return "2.5";
+            return "2.50";
         }
 
         internal static String T05(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
