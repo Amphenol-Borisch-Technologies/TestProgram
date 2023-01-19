@@ -52,7 +52,7 @@ namespace TestProgram {
         }
 
         internal static String T00(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
-            TestNumeric tn = (TestNumeric)test.ClassObject;
+            TestNumerical tn = (TestNumerical)test.ClassObject;
             return (tn.Low * double.PositiveInfinity).ToString();
         }
 
