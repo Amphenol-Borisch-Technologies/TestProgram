@@ -18,18 +18,21 @@ using TestLibrary.TestSupport;
 //
 namespace TestProgram {
     internal sealed partial class TestProgramTests {
-        private static Int32 _U6_CRC_PostCalibration = 0xABCD;
-
-        private static Int32 GetU6_CRC_PostCalibration() {
-            return _U6_CRC_PostCalibration;
-        }
 
         internal static String T08(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
-            if (GetU6_CRC_PreCalibration() != _U6_CRC_PreCalibration) return EventCodes.FAIL;
-            // Program calibration info into Flash.  Implementation unspecified :-)
-            if (GetU6_CRC_PostCalibration() == _U6_CRC_PostCalibration) return EventCodes.FAIL;
-            // Deliberate FAIL, to demonstrate failing Test run.
-            else return EventCodes.PASS;
+            Int32 _U6_CRC_PostCalibration = 0xABCD;
+            return $"0x{_U6_CRC_PostCalibration:X4}";
+        }
+
+        internal static String T09(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
+            TestCustom tc = (TestCustom)test.ClassObject;
+            if (String.Equals(tc.Arguments["CalibrationConstant"], "ϕ")) return EventCodes.PASS;
+            else return EventCodes.FAIL;
+        }
+
+        internal static String T10(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
+            TestTextual tt = (TestTextual)test.ClassObject;
+            return tt.Text.ToUpper();
         }
     }
 }

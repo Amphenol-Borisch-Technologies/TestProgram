@@ -18,10 +18,10 @@ using TestLibrary.TestSupport;
 //
 namespace TestProgram {
     internal sealed partial class TestProgramTests {
+
         internal static String T07(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
-            // Implementation unspecified :-)
-            if (GetU6_CRC_PreCalibration() == _U6_CRC_PostCalibration) return EventCodes.PASS;
-            else return EventCodes.PASS;
+            Int32 _U6_CRC_PreCalibration = 0x050C;
+            return $"0x{_U6_CRC_PreCalibration:X4}";
         }
     }
 }
