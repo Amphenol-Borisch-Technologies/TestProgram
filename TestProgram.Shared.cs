@@ -26,6 +26,43 @@ using TestLibrary.TestSupport;
 //  - https://github.com/Amphenol-Borisch-Technologies/TestProgram
 //  - https://github.com/Amphenol-Borisch-Technologies/TestLibraryTests
 //
+// NOTE: Two types of TestLibrary/operator initiated cancellations possible, proactive & reactive:
+//  1)  Proactive:
+//      - Microsoft's recommended CancellationTokenSource technique, which can proactively
+//        cancel currently executing Test, *if* implemented.
+//      - Implementation is the Test Developer's responsibility.
+//      - Implementation necessary if the *currently* executing Test must be cancellable during
+//        execution.
+//  2)  Reactive:
+//      - TestLibrary's already implemented/always available & default reactive "Cancel before next Test" technique,
+//        which simply sets this._cancelled Boolean to true, checked at the end of RunTest()'s foreach loop.
+//      - If this._cancelled is true, RunTest()'s foreach loop is broken, causing reactive cancellation
+//        prior to the next Test's execution.
+//      - Note: This doesn't proactively cancel the *currently* executing Test, which runs to completion.
+//  Summary:
+//      - If it's necessary to deterministically cancel a specific Test's execution, Microsoft's
+//        CancellationTokenSource technique *must* be implemented by the Test Developer.
+//      - If it's only necessary to deterministically cancel overall Test Program execution,
+//        TestLibrary's basic "Cancel before next Test" technique is already available without
+//        any Test Developer implemenation needed.
+//      - Note: Some Test's may not be safely cancellable mid-execution.
+//          - For such, simply don't implement Microsoft's CancellationTokenSource technique.
+//  https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads
+//  https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-cancellation
+//  https://learn.microsoft.com/en-us/dotnet/standard/threading/canceling-threads-cooperatively
+//
+//  And Finally:
+//      - Any TestProgram's Test can initiate a cancellation programmatically by simply
+//        throwing a TestCancellationException:
+//        - Let's say we want to abort if specific conditions occur in a Test, for example if
+//          power application fails.
+//        - We don't want to continue testing if the UUT's applied power busses fail,
+//          because any downstream failures are likely due to the UUT not being powered
+//          correctly.
+//        - So, simply directly set test.Measurement's value, then throw a
+//          TestCancellationException if an applied power bus fails.
+//        - This is pseudo-simulated in T03 in https://github.com/Amphenol-Borisch-Technologies/TestProgram/blob/master/TestProgram.Shared.cs
+//
 namespace TestProgram {
     internal sealed partial class TestProgramTests {
         private static DialogResult _dialogResult;
@@ -72,12 +109,15 @@ namespace TestProgram {
             for (Int32 i = 0; i < 100; i++) {
                 Thread.Sleep(50); // Sleep so Cancel or Emergency Stop buttons can be tested.
                 Application.DoEvents();
-                if (cancellationToken.IsCancellationRequested) throw new TestCancellationException($"Test '{test.ID}' Cancelled by operator request.");
+                if (cancellationToken.IsCancellationRequested) {
+                    test.Measurement = "0.3";
+                    throw new TestCancellationException($"Test '{test.ID}' Cancelled by operator request.");
+                }
                 // Above implements Microsoft's proactive CancellationTokenSource technique, in one of multiple fashions,
                 // which aborts the currently executing Test if Test Operator cancels.
                 // Multiple Cancellation methods detailed at https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads.
             }
-            return "0.90";
+            return "0.9";
         }
 
         internal static String T04(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
