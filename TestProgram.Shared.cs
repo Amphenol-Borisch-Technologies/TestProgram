@@ -26,7 +26,7 @@ using TestLibrary.TestSupport;
 //  - https://github.com/Amphenol-Borisch-Technologies/TestProgram
 //  - https://github.com/Amphenol-Borisch-Technologies/TestLibraryTests
 //
-// NOTE: Two types of TestLibrary/operator initiated cancellations possible, proactive & reactive:
+// NOTE: Two types of TestLibrary/Operator initiated cancellations possible, proactive & reactive:
 //  1)  Proactive:
 //      - Microsoft's recommended CancellationTokenSource technique, which can proactively
 //        cancel currently executing Test, *if* implemented.
@@ -51,7 +51,7 @@ using TestLibrary.TestSupport;
 //  https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-cancellation
 //  https://learn.microsoft.com/en-us/dotnet/standard/threading/canceling-threads-cooperatively
 //
-//  And Finally:
+//  NOTE: TestProgram/Test Developer initiated cancellations also possible:
 //      - Any TestProgram's Test can initiate a cancellation programmatically by simply
 //        throwing a TestCancellationException:
 //        - Let's say we want to abort if specific conditions occur in a Test, for example if
@@ -61,7 +61,9 @@ using TestLibrary.TestSupport;
 //          correctly.
 //        - So, simply directly set test.Measurement's value, then throw a
 //          TestCancellationException if an applied power bus fails.
-//        - This is pseudo-simulated in T03 in https://github.com/Amphenol-Borisch-Technologies/TestProgram/blob/master/TestProgram.Shared.cs
+//        - This is simulated in T01 in https://github.com/Amphenol-Borisch-Technologies/TestProgram/blob/master/TestProgram.Shared.cs
+//        - Test Developer must set test.Measurement's value for it to be Logged,
+//          else default String.Empty or Double.NaN values are Logged.
 //
 namespace TestProgram {
     internal sealed partial class TestProgramTests {
@@ -94,7 +96,16 @@ namespace TestProgram {
         }
 
         internal static String T01(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
-            return "5.12";
+            Random r = new Random();
+            Int32 i = r.Next(460, 540); // Random Int32 between 460 & 540.
+            Double d = Convert.ToDouble(i) / 100.0; // Random Double between 4.6 & 5.4; 3 in 8 chance of failing, or 37.5%.
+            String s = d.ToString();
+            TestNumerical tn = (TestNumerical)test.ClassObject;
+            if ((tn.Low <= d) && (d <= tn.High)) return s; // 5.0VDC power bus passed.
+            else {
+                test.Measurement = s;
+                throw new TestCancellationException($"Test '{test.ID}', '{test.Description}' exceeded limits, programmatically cancelled.");
+            }
         }
 
         internal static String T02(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
@@ -104,15 +115,13 @@ namespace TestProgram {
         internal static String T03(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
             MessageBox.Show($"The next Test, '{test.ID}', executes for 8 seconds, permitting Cancellation or Emergency Stopping if desired.{Environment.NewLine}{Environment.NewLine}"
                 + $"It implements proactive Cancellation via Microsoft's CancellationToken.{Environment.NewLine}{Environment.NewLine}"
-                + $"Note that Cancellation occurs immediately, interrupting Test '{test.ID}'.",
+                + $"Note that Cancellation occurs immediately, interrupting Test '{test.ID}'.{Environment.NewLine}{Environment.NewLine}"
+                + $"Note also that Measurement = 'NaN' because developer doesn't explicitly assign it a value.",
                 "Cancel or Emergency Stop", MessageBoxButtons.OK, MessageBoxIcon.Information);
             for (Int32 i = 0; i < 100; i++) {
                 Thread.Sleep(50); // Sleep so Cancel or Emergency Stop buttons can be tested.
                 Application.DoEvents();
-                if (cancellationToken.IsCancellationRequested) {
-                    test.Measurement = "0.3";
-                    throw new TestCancellationException($"Test '{test.ID}' Cancelled by operator request.");
-                }
+                if (cancellationToken.IsCancellationRequested) throw new TestCancellationException($"Test '{test.ID}' Cancelled by operator request.");
                 // Above implements Microsoft's proactive CancellationTokenSource technique, in one of multiple fashions,
                 // which aborts the currently executing Test if Test Operator cancels.
                 // Multiple Cancellation methods detailed at https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads.
@@ -121,7 +130,7 @@ namespace TestProgram {
         }
 
         internal static String T04(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
-            return "2.50";
+            return "2.5";
         }
 
         internal static String T05(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
