@@ -59,11 +59,10 @@ using TestLibrary.TestSupport;
 //        - We don't want to continue testing if the UUT's applied power busses fail,
 //          because any downstream failures are likely due to the UUT not being powered
 //          correctly.
-//        - So, simply directly set test.Measurement's value, then throw a
-//          TestCancellationException if an applied power bus fails.
+//        - So, simply throw a TestCancellationException if an applied power bus fails.
 //        - This is simulated in T01 in https://github.com/Amphenol-Borisch-Technologies/TestProgram/blob/master/TestProgram.Shared.cs
-//        - Test Developer must set test.Measurement's value for it to be Logged,
-//          else default String.Empty or Double.NaN values are Logged.
+//        - Test Developer must set TestCancellationException's message to Measeured
+//          value for it to be Logged, else default String.Empty or Double.NaN values are Logged.
 //
 namespace TestProgram {
     internal sealed partial class TestProgramTests {
@@ -102,10 +101,7 @@ namespace TestProgram {
             String s = d.ToString();
             TestNumerical tn = (TestNumerical)test.ClassObject;
             if ((tn.Low <= d) && (d <= tn.High)) return s; // 5.0VDC power bus passed.
-            else {
-                test.Measurement = s;
-                throw new TestCancellationException();
-            }
+            else throw new TestCancellationException(s);
         }
 
         internal static String T02(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
