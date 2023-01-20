@@ -104,7 +104,7 @@ namespace TestProgram {
             if ((tn.Low <= d) && (d <= tn.High)) return s; // 5.0VDC power bus passed.
             else {
                 test.Measurement = s;
-                throw new TestCancellationException($"Test '{test.ID}', '{test.Description}' exceeded limits, programmatically cancelled.");
+                throw new TestCancellationException();
             }
         }
 
@@ -121,7 +121,7 @@ namespace TestProgram {
             for (Int32 i = 0; i < 100; i++) {
                 Thread.Sleep(50); // Sleep so Cancel or Emergency Stop buttons can be tested.
                 Application.DoEvents();
-                if (cancellationToken.IsCancellationRequested) throw new TestCancellationException($"Test '{test.ID}' Cancelled by operator request.");
+                if (cancellationToken.IsCancellationRequested) throw new TestCancellationException();
                 // Above implements Microsoft's proactive CancellationTokenSource technique, in one of multiple fashions,
                 // which aborts the currently executing Test if Test Operator cancels.
                 // Multiple Cancellation methods detailed at https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads.
