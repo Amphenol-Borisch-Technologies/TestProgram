@@ -23,5 +23,10 @@ namespace TestProgram {
             Int32 _U6_CRC_PreCalibration = 0x050C;
             return $"0x{_U6_CRC_PreCalibration:X4}";
         }
+
+        internal static String T10(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
+            TestTextual tt = (TestTextual)test.ClassObject;
+            return tt.Text.ToLower();
+        }
     }
 }
