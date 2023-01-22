@@ -1,4 +1,4 @@
-# TestProgram is a simple functional test sequencing demonstration program for sibling project TestLibrary.
+# TestProgram is a simple functional test sequencer/test executive demonstration program for sibling project TestLibrary.
     
   Sibling project TestLibrary is the necessary companion to TestProgram.
   
