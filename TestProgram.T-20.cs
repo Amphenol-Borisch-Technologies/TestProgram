@@ -21,8 +21,7 @@ namespace TestProgram {
     internal sealed partial class TestProgramTests {
 
         internal static String T08(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
-            Int32 _U6_CRC_PostCalibration = 0xABCD;
-            return $"0x{_U6_CRC_PostCalibration:X4}";
+            return $"0x{0xABCD:X4}";
         }
 
         internal static String T09(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {

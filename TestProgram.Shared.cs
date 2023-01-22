@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
@@ -89,6 +91,44 @@ namespace TestProgram {
             return (String)_methodInfo.Invoke(null, new object[] { test, instruments, cancellationToken });
         }
 
+        private static (String standardError, String standardOutput) 
+            ISP(String ispProgrammer, String uutConnector, Test test, Dictionary<String, Instrument> instruments, Func<Boolean> PowerISPMethod) {
+            InstrumentTasks.SCPI99Reset(instruments); // PowerOff Method.
+            _ = MessageBox.Show($"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
+                                $"Connect '{ispProgrammer}' to UUT '{uutConnector}'.{Environment.NewLine}{Environment.NewLine}" +
+                                $"AFTER connecting, click OK to re-power.", $"Connect '{uutConnector}'", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (!PowerISPMethod()) throw new TestCancellationException();
+            TestISP tisp = (TestISP)test.ClassObject;
+            String standardError, standardOutput;
+            using (Process process = new Process()) {
+                ProcessStartInfo psi = new ProcessStartInfo {
+                    Arguments = tisp.ISPExecutableArguments,
+                    FileName = tisp.ISPExecutable,
+                    WorkingDirectory = tisp.ISPExecutableFolder,
+                    UseShellExecute = false,
+                    RedirectStandardError = true,
+                    RedirectStandardOutput = true
+                };
+                process.StartInfo = psi;
+                process.Start();
+                StreamReader se = process.StandardError;
+                standardError = se.ReadToEnd().Trim();
+                StreamReader so = process.StandardOutput;
+                standardOutput = so.ReadToEnd().Trim();
+            }
+            InstrumentTasks.SCPI99Reset(instruments); // PowerOff Method.
+            _ = MessageBox.Show($"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
+                                $"Disconnect '{ispProgrammer}' from UUT '{uutConnector}'.{Environment.NewLine}{Environment.NewLine}" +
+                                $"AFTER disconnecting, click OK to re-power.", $"Disconnect '{uutConnector}'", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (!PowerISPMethod()) throw new TestCancellationException();
+            return (standardError, standardOutput);
+        }
+
+        private static Boolean PowerISPMethod() {
+            // Simulates method to power UUT for ISP.  Returns true if succeeds, false if fails.
+            return true;
+        }
+
         internal static String T00(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
             TestNumerical tn = (TestNumerical)test.ClassObject;
             return (tn.Low * double.PositiveInfinity).ToString();
@@ -97,11 +137,13 @@ namespace TestProgram {
         internal static String T01(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
             Random r = new Random();
             Int32 i = r.Next(460, 540); // Random Int32 between 460 & 540.
-            Double d = Convert.ToDouble(i) / 100.0; // Random Double between 4.6 & 5.4; 3 in 8 chance of failing, or 37.5%.
+            Double d = Convert.ToDouble(i) / 100.0; // Random Double between 4.6 & 5.4; 3 in 8 (37.5%) chance of failing.  Flaky 5VDC power supply!
             String s = d.ToString();
             TestNumerical tn = (TestNumerical)test.ClassObject;
-            if ((tn.Low <= d) && (d <= tn.High)) return s; // 5.0VDC power bus passed.
+            if ((tn.Low <= d) && (d <= tn.High)) return s;
+            // Simulates 5VDC power bus passing.
             else throw new TestCancellationException(s);
+            // Simulates 5VDC power bus failing, so cancel test execution, returning measured value for Logging.
         }
 
         internal static String T02(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
