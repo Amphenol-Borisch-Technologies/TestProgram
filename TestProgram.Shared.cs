@@ -119,6 +119,7 @@ namespace TestProgram {
             Double d = Convert.ToDouble(i) / 100.0; // Random Double between 4.6 & 5.4; 3 in 8 (37.5%) chance of failing.  Flaky 5VDC power supply!
             String s = d.ToString();
             TestNumerical tn = (TestNumerical)test.ClassObject;
+            throw new TestCancellationException(s);
             if ((tn.Low <= d) && (d <= tn.High)) return s;
             // Simulates 5VDC power bus passing.
             else throw new TestCancellationException(s);
