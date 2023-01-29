@@ -15,7 +15,7 @@ namespace TestProgram {
         }
 
         protected override async Task<String> RunTestAsync(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
-            // NOTE: Override TestForm's abstract RunTestAsync() method.
+            // NOTE: Override TestExecutive's abstract RunTestAsync() method.
             // Implementing RunTestAsync() in TestLibrary's RunTestAsync() method would necessiate
             // having a reference to this client Test project, and we don't want that.
             Type type = Type.GetType("TestProgram.TestProgramTests");
