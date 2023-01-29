@@ -136,10 +136,8 @@ namespace TestProgram {
                 + $"Note that Cancellation occurs immediately, interrupting Test '{test.ID}'.{Environment.NewLine}{Environment.NewLine}"
                 + $"Note also that Measurement = 'NaN' because developer doesn't explicitly assign it a value.",
                 "Cancel or Emergency Stop", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Task.Delay(8000);
             for (Int32 i = 0; i < 100; i++) {
-                Thread.Sleep(50); // Sleep so Cancel or Emergency Stop buttons can be tested.
-                Application.DoEvents();
+                Thread.Sleep(50);
                 if (cancellationToken.IsCancellationRequested) throw new TestCancellationException();
                 // Above implements Microsoft's proactive CancellationTokenSource technique, in one of multiple fashions,
                 // which aborts the currently executing Test if Test Operator cancels.
@@ -159,8 +157,7 @@ namespace TestProgram {
                 + $"Note that Cancellation *does not* occur immediately, and '{test.ID}' runs to completion.",
                 "Cancel or Emergency Stop", MessageBoxButtons.OK, MessageBoxIcon.Information);
             for (Int32 i = 0; i < 100; i++) {
-                Thread.Sleep(50); // Sleep so Cancel or Emergency Stop buttons can be tested.
-                Application.DoEvents();
+                Thread.Sleep(50);
                 //  Microsoft's proactive CancellationTokenSource technique not implemented, but TestLibrary's basic reactive
                 //  "Cancel before next Test" is always operational.
             }
