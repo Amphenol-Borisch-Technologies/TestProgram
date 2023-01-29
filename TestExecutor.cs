@@ -22,7 +22,6 @@ namespace TestProgram {
             MethodInfo methodInfo = type.GetMethod(test.ID, BindingFlags.Static | BindingFlags.NonPublic);
             Object o = await Task.Run(() => methodInfo.Invoke(null, new object[] { test, instruments, cancellationToken }));
             return (String)o;
-            // return (String)methodInfo.Invoke(null, new object[] { test, instruments, cancellationToken });
         }
     }
 }
