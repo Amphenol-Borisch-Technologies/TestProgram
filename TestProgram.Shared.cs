@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestLibrary;
 using TestLibrary.Config;
@@ -73,7 +74,7 @@ namespace TestProgram {
         private static (String standardError, String standardOutput) 
             ISP(String ispProgrammer, String uutConnector, Test test, Dictionary<String, Instrument> instruments, Func<Boolean> PowerISPMethod) {
             InstrumentTasks.SCPI99Reset(instruments); // PowerOff Method.
-            _ = MessageBox.Show($"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
+            MessageBox.Show($"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
                                 $"Connect '{ispProgrammer}' to UUT '{uutConnector}'.{Environment.NewLine}{Environment.NewLine}" +
                                 $"AFTER connecting, click OK to re-power.", $"Connect '{uutConnector}'", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             if (!PowerISPMethod()) throw new TestCancellationException();
@@ -96,7 +97,7 @@ namespace TestProgram {
                 standardOutput = so.ReadToEnd().Trim();
             }
             InstrumentTasks.SCPI99Reset(instruments); // PowerOff Method.
-            _ = MessageBox.Show($"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
+            MessageBox.Show($"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
                                 $"Disconnect '{ispProgrammer}' from UUT '{uutConnector}'.{Environment.NewLine}{Environment.NewLine}" +
                                 $"AFTER disconnecting, click OK to re-power.", $"Disconnect '{uutConnector}'", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             if (!PowerISPMethod()) throw new TestCancellationException();
@@ -119,7 +120,6 @@ namespace TestProgram {
             Double d = Convert.ToDouble(i) / 100.0; // Random Double between 4.6 & 5.4; 3 in 8 (37.5%) chance of failing.  Flaky 5VDC power supply!
             String s = d.ToString();
             TestNumerical tn = (TestNumerical)test.ClassObject;
-            throw new TestCancellationException(s);
             if ((tn.Low <= d) && (d <= tn.High)) return s;
             // Simulates 5VDC power bus passing.
             else throw new TestCancellationException(s);
@@ -136,6 +136,7 @@ namespace TestProgram {
                 + $"Note that Cancellation occurs immediately, interrupting Test '{test.ID}'.{Environment.NewLine}{Environment.NewLine}"
                 + $"Note also that Measurement = 'NaN' because developer doesn't explicitly assign it a value.",
                 "Cancel or Emergency Stop", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Task.Delay(8000);
             for (Int32 i = 0; i < 100; i++) {
                 Thread.Sleep(50); // Sleep so Cancel or Emergency Stop buttons can be tested.
                 Application.DoEvents();

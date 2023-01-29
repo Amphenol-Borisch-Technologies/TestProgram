@@ -57,7 +57,7 @@
     <ApplicationIcon>Resources\Amphenol.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="TestProgram.Form.cs">
+    <Compile Include="TestExecutor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TestProgram.Main.cs" />

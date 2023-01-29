@@ -7,7 +7,7 @@ namespace TestProgram {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TestProgramForm());
+            Application.Run(new TestExecutor());
         }
     }
 }
