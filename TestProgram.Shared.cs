@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestLibrary;
 using TestLibrary.Config;
 using TestLibrary.Instruments;
+using TestLibrary.Instruments.Keysight;
 using TestLibrary.TestSupport;
 
 // NOTE: Place all Test methods, convenience methods, classes & comments applicable to multiple Groups in this file.
@@ -74,7 +73,7 @@ namespace TestProgram {
         private static (String standardError, String standardOutput) 
             ISP(String ispProgrammer, String uutConnector, Test test, Dictionary<String, Instrument> instruments, Func<Boolean> PowerISPMethod) {
             InstrumentTasks.SCPI99Reset(instruments); // PowerOff Method.
-            MessageBox.Show($"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
+            MessageBox.Show(Form.ActiveForm, $"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
                                 $"Connect '{ispProgrammer}' to UUT '{uutConnector}'.{Environment.NewLine}{Environment.NewLine}" +
                                 $"AFTER connecting, click OK to re-power.", $"Connect '{uutConnector}'", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             if (!PowerISPMethod()) throw new TestCancellationException();
@@ -97,7 +96,7 @@ namespace TestProgram {
                 standardOutput = so.ReadToEnd().Trim();
             }
             InstrumentTasks.SCPI99Reset(instruments); // PowerOff Method.
-            MessageBox.Show($"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
+            MessageBox.Show(Form.ActiveForm, $"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
                                 $"Disconnect '{ispProgrammer}' from UUT '{uutConnector}'.{Environment.NewLine}{Environment.NewLine}" +
                                 $"AFTER disconnecting, click OK to re-power.", $"Disconnect '{uutConnector}'", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             if (!PowerISPMethod()) throw new TestCancellationException();
@@ -131,7 +130,7 @@ namespace TestProgram {
         }
 
         internal static String T03(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
-            MessageBox.Show($"The next Test, '{test.ID}', executes for 8 seconds, permitting Cancellation or Emergency Stopping if desired.{Environment.NewLine}{Environment.NewLine}"
+            MessageBox.Show(Form.ActiveForm, $"The next Test, '{test.ID}', executes for 8 seconds, permitting Cancellation or Emergency Stopping if desired.{Environment.NewLine}{Environment.NewLine}"
                 + $"It implements proactive Cancellation via Microsoft's CancellationToken.{Environment.NewLine}{Environment.NewLine}"
                 + $"Note that Cancellation occurs immediately, interrupting Test '{test.ID}'.{Environment.NewLine}{Environment.NewLine}"
                 + $"Note also that Measurement = 'NaN' because developer doesn't explicitly assign it a value.",
@@ -151,7 +150,7 @@ namespace TestProgram {
         }
 
         internal static String T05(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
-            MessageBox.Show($"The next Test, '{test.ID}', also executes for 8 seconds, again permitting Cancellation or Emergency Stopping if desired.{Environment.NewLine}{Environment.NewLine}"
+            MessageBox.Show(Form.ActiveForm, $"The next Test, '{test.ID}', also executes for 8 seconds, again permitting Cancellation or Emergency Stopping if desired.{Environment.NewLine}{Environment.NewLine}"
                 + $"It *does not* implement proactive Cancellation via Microsoft's CancellationToken.{Environment.NewLine}{Environment.NewLine}"
                 + $"Instead, it utilizes reactive Cancellation via TestLibrary's default 'Cancel before next Test' technique.{Environment.NewLine}{Environment.NewLine}"
                 + $"Note that Cancellation *does not* occur immediately, and '{test.ID}' runs to completion.",
