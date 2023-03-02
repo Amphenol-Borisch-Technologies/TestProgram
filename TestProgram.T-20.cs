@@ -19,17 +19,17 @@ using TestLibrary.TestSupport;
 namespace TestProgram {
     internal sealed partial class TestProgramTests {
 
-        internal static String T08(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
+        internal static String T08(Test test, Dictionary<INSTRUMENTS, Instrument> instruments, CancellationToken CT) {
             return $"0x{0xABCD:X4}";
         }
 
-        internal static String T09(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
+        internal static String T09(Test test, Dictionary<INSTRUMENTS, Instrument> instruments, CancellationToken CT) {
             TestCustomizable tc = (TestCustomizable)test.ClassObject;
             if (String.Equals(tc.Arguments["CalibrationConstant"], "ϕ", StringComparison.Ordinal)) return EventCodes.PASS;
             else return EventCodes.FAIL;
         }
 
-        internal static String T11(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
+        internal static String T11(Test test, Dictionary<INSTRUMENTS, Instrument> instruments, CancellationToken CT) {
             TestTextual tt = (TestTextual)test.ClassObject;
             return tt.Text;
         }

@@ -14,13 +14,14 @@ namespace TestProgram {
             // https://stackoverflow.com/questions/40933304/how-to-create-an-icon-for-visual-studio-with-just-mspaint-and-visual-studio
         }
 
-        protected override async Task<String> RunTestAsync(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
+        protected override async Task<String> RunTestAsync(Test test, Dictionary<INSTRUMENTS, Instrument> instruments, CancellationToken CT) {
             // NOTE: Override TestExecutive's abstract RunTestAsync() method.
             // Implementing RunTestAsync() in TestLibrary's RunTestAsync() method would necessiate
             // having a reference to this client Test project, and we don't want that.
             Type type = Type.GetType("TestProgram.TestProgramTests");
+
             MethodInfo methodInfo = type.GetMethod(test.ID, BindingFlags.Static | BindingFlags.NonPublic);
-            Object o = await Task.Run(() => methodInfo.Invoke(null, new object[] { test, instruments, cancellationToken }));
+            Object o = await Task.Run(() => methodInfo.Invoke(null, new object[] { test, instruments, CT }));
             return (String)o;
         }
     }

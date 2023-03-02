@@ -71,9 +71,9 @@ namespace TestProgram {
         static TestProgramTests() { }
 
         private static (String standardError, String standardOutput) 
-            ISP(String ispProgrammer, String uutConnector, Test test, Dictionary<String, Instrument> instruments, Func<Boolean> PowerISPMethod) {
-            InstrumentTasks.SCPI99Reset(instruments); // PowerOff Method.
-            MessageBox.Show(Form.ActiveForm, $"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
+            ISP(String ispProgrammer, String uutConnector, Test test, Dictionary<INSTRUMENTS, Instrument> instruments, Func<Boolean> PowerISPMethod) {
+            InstrumentTasks.SCPI99_Reset(instruments); // PowerOff Method.
+            _ = MessageBox.Show( $"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
                                 $"Connect '{ispProgrammer}' to UUT '{uutConnector}'.{Environment.NewLine}{Environment.NewLine}" +
                                 $"AFTER connecting, click OK to re-power.", $"Connect '{uutConnector}'", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             if (!PowerISPMethod()) throw new TestCancellationException();
@@ -95,8 +95,8 @@ namespace TestProgram {
                 StreamReader so = process.StandardOutput;
                 standardOutput = so.ReadToEnd().Trim();
             }
-            InstrumentTasks.SCPI99Reset(instruments); // PowerOff Method.
-            MessageBox.Show(Form.ActiveForm, $"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
+            InstrumentTasks.SCPI99_Reset(instruments); // PowerOff Method.
+            _ = MessageBox.Show($"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
                                 $"Disconnect '{ispProgrammer}' from UUT '{uutConnector}'.{Environment.NewLine}{Environment.NewLine}" +
                                 $"AFTER disconnecting, click OK to re-power.", $"Disconnect '{uutConnector}'", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             if (!PowerISPMethod()) throw new TestCancellationException();
@@ -108,12 +108,12 @@ namespace TestProgram {
             return true;
         }
 
-        internal static String T00(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
+        internal static String T00(Test test, Dictionary<INSTRUMENTS, Instrument> instruments, CancellationToken CT) {
             TestNumerical tn = (TestNumerical)test.ClassObject;
             return (tn.Low * double.PositiveInfinity).ToString();
         }
 
-        internal static String T01(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
+        internal static String T01(Test test, Dictionary<INSTRUMENTS, Instrument> instruments, CancellationToken CT) {
             Random r = new Random();
             Int32 i = r.Next(460, 540); // Random Int32 between 460 & 540.
             Double d = Convert.ToDouble(i) / 100.0; // Random Double between 4.6 & 5.4; 3 in 8 (37.5%) chance of failing.  Flaky 5VDC power supply!
@@ -125,19 +125,19 @@ namespace TestProgram {
             // Simulates 5VDC power bus failing, so cancel test execution, returning measured value for Logging.
         }
 
-        internal static String T02(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
+        internal static String T02(Test test, Dictionary<INSTRUMENTS, Instrument> instruments, CancellationToken CT) {
             return "3.29";
         }
 
-        internal static String T03(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
-            MessageBox.Show(Form.ActiveForm, $"The next Test, '{test.ID}', executes for 8 seconds, permitting Cancellation or Emergency Stopping if desired.{Environment.NewLine}{Environment.NewLine}"
+        internal static String T03(Test test, Dictionary<INSTRUMENTS, Instrument> instruments, CancellationToken CT) {
+            _ = MessageBox.Show($"The next Test, '{test.ID}', executes for 8 seconds, permitting Cancellation or Emergency Stopping if desired.{Environment.NewLine}{Environment.NewLine}"
                 + $"It implements proactive Cancellation via Microsoft's CancellationToken.{Environment.NewLine}{Environment.NewLine}"
                 + $"Note that Cancellation occurs immediately, interrupting Test '{test.ID}'.{Environment.NewLine}{Environment.NewLine}"
                 + $"Note also that Measurement = 'NaN' because developer doesn't explicitly assign it a value.",
                 "Cancel or Emergency Stop", MessageBoxButtons.OK, MessageBoxIcon.Information);
             for (Int32 i = 0; i < 100; i++) {
                 Thread.Sleep(50);
-                if (cancellationToken.IsCancellationRequested) throw new TestCancellationException();
+                if (CT.IsCancellationRequested) throw new TestCancellationException();
                 // Above implements Microsoft's proactive CancellationTokenSource technique, in one of multiple fashions,
                 // which aborts the currently executing Test if Test Operator cancels.
                 // Multiple Cancellation methods detailed at https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads.
@@ -145,12 +145,12 @@ namespace TestProgram {
             return "0.9";
         }
 
-        internal static String T04(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
+        internal static String T04(Test test, Dictionary<INSTRUMENTS, Instrument> instruments, CancellationToken CT) {
             return "2.5";
         }
 
-        internal static String T05(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
-            MessageBox.Show(Form.ActiveForm, $"The next Test, '{test.ID}', also executes for 8 seconds, again permitting Cancellation or Emergency Stopping if desired.{Environment.NewLine}{Environment.NewLine}"
+        internal static String T05(Test test, Dictionary<INSTRUMENTS, Instrument> instruments, CancellationToken CT) {
+            _ = MessageBox.Show($"The next Test, '{test.ID}', also executes for 8 seconds, again permitting Cancellation or Emergency Stopping if desired.{Environment.NewLine}{Environment.NewLine}"
                 + $"It *does not* implement proactive Cancellation via Microsoft's CancellationToken.{Environment.NewLine}{Environment.NewLine}"
                 + $"Instead, it utilizes reactive Cancellation via TestLibrary's default 'Cancel before next Test' technique.{Environment.NewLine}{Environment.NewLine}"
                 + $"Note that Cancellation *does not* occur immediately, and '{test.ID}' runs to completion.",
@@ -163,7 +163,7 @@ namespace TestProgram {
             return "1.75";
         }
 
-        internal static String T06(Test test, Dictionary<String, Instrument> instruments, CancellationToken cancellationToken) {
+        internal static String T06(Test test, Dictionary<INSTRUMENTS, Instrument> instruments, CancellationToken CT) {
             return "1.0001E7";
         }
     }
