@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestProgram {
+namespace TestExecutor {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TestProgram {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TestProgram.TestProgram", typeof(TestProgram).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TestExecutor.TestProgram", typeof(TestProgram).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

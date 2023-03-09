@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace TestProgram {
-    internal class TestProgramMain {
+namespace TestExecutor {
+    internal class TestExecutorMain {
         [STAThread]
         static void Main() {
             Application.EnableVisualStyles();

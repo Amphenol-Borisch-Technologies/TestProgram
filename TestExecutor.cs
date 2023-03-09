@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using TestLibrary;
-using TestLibrary.Config;
-using TestLibrary.Instruments;
 
-namespace TestProgram {
+namespace TestExecutor {
     internal sealed class TestExecutor : TestExecutive {
         internal TestExecutor() : base(Properties.Resources.Amphenol) {
             // NOTE: Change base constructor's Icon as applicable, depending on customer.

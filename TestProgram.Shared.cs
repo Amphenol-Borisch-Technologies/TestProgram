@@ -66,7 +66,7 @@ using TestLibrary.TestSupport;
 //        - Test Developer must set TestCancellationException's message to Measeured
 //          value for it to be Logged, else default String.Empty or Double.NaN values are Logged.
 //
-namespace TestProgram {
+namespace TestExecutor {
     internal sealed partial class TestProgramTests {
         static TestProgramTests() { }
 

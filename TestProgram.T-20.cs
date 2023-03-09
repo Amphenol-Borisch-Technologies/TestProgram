@@ -16,7 +16,7 @@ using TestLibrary.TestSupport;
 //      If T03 belongs exclusively to Group T-20, place it in this file.
 //      RunTestMethod is common to both Groups T-10 & T-20, so is placed in TestProgram.Shared.cs.
 //
-namespace TestProgram {
+namespace TestExecutor {
     internal sealed partial class TestProgramTests {
 
         internal static String T08(String testID, TestExecutor testExecutor) {

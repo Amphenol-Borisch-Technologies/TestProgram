@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5AB1CDE9-19FE-49B3-AAD6-A3C55DBC98A1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>TestProgram</RootNamespace>
+    <RootNamespace>TestExecutor</RootNamespace>
     <AssemblyName>TestProgram</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -51,7 +51,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>TestProgram.TestProgramMain</StartupObject>
+    <StartupObject>TestExecutor.TestExecutorMain</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\Amphenol.ico</ApplicationIcon>
@@ -60,7 +60,7 @@
     <Compile Include="TestExecutor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TestProgram.Main.cs" />
+    <Compile Include="TestExecutor.Main.cs" />
     <Compile Include="TestProgram.Shared.cs" />
     <Compile Include="TestProgram.T-10.cs" />
     <Compile Include="TestProgram.T-20.cs" />
