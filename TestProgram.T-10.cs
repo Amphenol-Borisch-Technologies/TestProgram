@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading;
 using TestLibrary;
 using TestLibrary.Config;
 using TestLibrary.Instruments;
@@ -20,8 +18,7 @@ namespace TestExecutor {
     internal sealed partial class TestProgramTests {
 
         internal static String T07(String testID, TestExecutor testExecutor) {
-            (String standardError, String standardOutput) = ISP("MPLAB PICkit 4 In-Circuit Debugger", "J11", testExecutor.ConfigTest.Tests[testID], testExecutor.Instruments, PowerISPMethod);
-            // NOTE: Parse & return portion of ISP's standardError/standardOutput corresponding to App.config's ISPResult.
+            String ExitCode = TestTasks.ISP_ExitCode("MPLAB PICkit 4 In-Circuit Debugger", "J11", testExecutor.ConfigTest.Tests[testID], testExecutor.Instruments, PowerISPMethod);
             return $"0x{0x050C:X4}";
         }
 

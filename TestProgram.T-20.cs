@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading;
 using TestLibrary;
 using TestLibrary.Config;
 using TestLibrary.Instruments;

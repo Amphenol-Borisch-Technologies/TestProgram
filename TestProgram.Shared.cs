@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using TestLibrary;
@@ -70,42 +68,8 @@ namespace TestExecutor {
     internal sealed partial class TestProgramTests {
         static TestProgramTests() { }
 
-        private static (String standardError, String standardOutput) 
-            ISP(String ispProgrammer, String uutConnector, Test test, Dictionary<INSTRUMENTS, Instrument> instruments, Func<Boolean> PowerISPMethod) {
-            InstrumentTasks.SCPI99_Reset(instruments); // PowerOff Method.
-            _ = MessageBox.Show( $"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
-                                $"Connect '{ispProgrammer}' to UUT '{uutConnector}'.{Environment.NewLine}{Environment.NewLine}" +
-                                $"AFTER connecting, click OK to re-power.", $"Connect '{uutConnector}'", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            if (!PowerISPMethod()) throw new TestCancellationException();
-            TestISP tisp = (TestISP)test.ClassObject;
-            String standardError, standardOutput;
-            using (Process process = new Process()) {
-                ProcessStartInfo psi = new ProcessStartInfo {
-                    Arguments = tisp.ISPExecutableArguments,
-                    FileName = tisp.ISPExecutable,
-                    WorkingDirectory = tisp.ISPExecutableFolder,
-                    UseShellExecute = false,
-                    RedirectStandardError = true,
-                    RedirectStandardOutput = true
-                };
-                process.StartInfo = psi;
-                process.Start();
-                StreamReader se = process.StandardError;
-                standardError = se.ReadToEnd().Trim();
-                StreamReader so = process.StandardOutput;
-                standardOutput = so.ReadToEnd().Trim();
-            }
-            InstrumentTasks.SCPI99_Reset(instruments); // PowerOff Method.
-            _ = MessageBox.Show($"UUT now unpowered.{Environment.NewLine}{Environment.NewLine}" +
-                                $"Disconnect '{ispProgrammer}' from UUT '{uutConnector}'.{Environment.NewLine}{Environment.NewLine}" +
-                                $"AFTER disconnecting, click OK to re-power.", $"Disconnect '{uutConnector}'", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            if (!PowerISPMethod()) throw new TestCancellationException();
-            return (standardError, standardOutput);
-        }
-
-        private static Boolean PowerISPMethod() {
+        private static void PowerISPMethod(Dictionary<INSTRUMENTS, Instrument> instruments) {
             // Simulates method to power UUT for ISP.  Returns true for success, false for failure.
-            return true;
         }
 
         internal static String T00(String testID, TestExecutor testExecutor) {
