@@ -108,31 +108,31 @@ namespace TestProgram {
             return true;
         }
 
-        internal static String T00(Test test, TestExecutor testExecutor) {
-            TestNumerical testNumerical = (TestNumerical)test.ClassObject;
+        internal static String T00(String testID, TestExecutor testExecutor) {
+            TestNumerical testNumerical = (TestNumerical)testExecutor.ConfigTest.Tests[testID].ClassObject;
             return (testNumerical.Low * double.PositiveInfinity).ToString();
         }
 
-        internal static String T01(Test test, TestExecutor testExecutor) {
+        internal static String T01(String testID, TestExecutor testExecutor) {
             Random r = new Random();
             Int32 i = r.Next(460, 540); // Random Int32 between 460 & 540.
             Double d = Convert.ToDouble(i) / 100.0; // Random Double between 4.6 & 5.4; 3 in 8 (37.5%) chance of failing.  Flaky 5VDC power supply!
             String s = d.ToString();
-            TestNumerical testNumerical = (TestNumerical)test.ClassObject;
+            TestNumerical testNumerical = (TestNumerical)testExecutor.ConfigTest.Tests[testID].ClassObject;
             if ((testNumerical.Low <= d) && (d <= testNumerical.High)) return s;
             // Simulates 5VDC power bus passing.
             else throw new TestCancellationException(s);
             // Simulates 5VDC power bus failing, so cancel test execution, returning measured value for Logging.
         }
 
-        internal static String T02(Test test, TestExecutor testExecutor) {
+        internal static String T02(String testID, TestExecutor testExecutor) {
             return "3.29";
         }
 
-        internal static String T03(Test test, TestExecutor testExecutor) {
-            _ = MessageBox.Show($"The next Test, '{test.ID}', executes for 8 seconds, permitting Cancellation or Emergency Stopping if desired.{Environment.NewLine}{Environment.NewLine}"
+        internal static String T03(String testID, TestExecutor testExecutor) {
+            _ = MessageBox.Show($"The next Test, '{testID}', executes for 8 seconds, permitting Cancellation or Emergency Stopping if desired.{Environment.NewLine}{Environment.NewLine}"
                 + $"It implements proactive Cancellation via Microsoft's CancellationToken.{Environment.NewLine}{Environment.NewLine}"
-                + $"Note that Cancellation occurs immediately, interrupting Test '{test.ID}'.{Environment.NewLine}{Environment.NewLine}"
+                + $"Note that Cancellation occurs immediately, interrupting Test '{testID}'.{Environment.NewLine}{Environment.NewLine}"
                 + $"Note also that Measurement = 'NaN' because developer doesn't explicitly assign it a value.",
                 "Cancel or Emergency Stop", MessageBoxButtons.OK, MessageBoxIcon.Information);
             for (Int32 i = 0; i < 100; i++) {
@@ -145,15 +145,15 @@ namespace TestProgram {
             return "0.9";
         }
 
-        internal static String T04(Test test, TestExecutor testExecutor) {
+        internal static String T04(String testID, TestExecutor testExecutor) {
             return "2.5";
         }
 
-        internal static String T05(Test test, TestExecutor testExecutor) {
-            _ = MessageBox.Show($"The next Test, '{test.ID}', also executes for 8 seconds, again permitting Cancellation or Emergency Stopping if desired.{Environment.NewLine}{Environment.NewLine}"
+        internal static String T05(String testID, TestExecutor testExecutor) {
+            _ = MessageBox.Show($"The next Test, '{testID}', also executes for 8 seconds, again permitting Cancellation or Emergency Stopping if desired.{Environment.NewLine}{Environment.NewLine}"
                 + $"It *does not* implement proactive Cancellation via Microsoft's CancellationToken.{Environment.NewLine}{Environment.NewLine}"
                 + $"Instead, it utilizes reactive Cancellation via TestLibrary's default 'Cancel before next Test' technique.{Environment.NewLine}{Environment.NewLine}"
-                + $"Note that Cancellation *does not* occur immediately, and '{test.ID}' runs to completion.",
+                + $"Note that Cancellation *does not* occur immediately, and '{testID}' runs to completion.",
                 "Cancel or Emergency Stop", MessageBoxButtons.OK, MessageBoxIcon.Information);
             for (Int32 i = 0; i < 100; i++) {
                 Thread.Sleep(50);
@@ -163,7 +163,7 @@ namespace TestProgram {
             return "1.75";
         }
 
-        internal static String T06(Test test, TestExecutor testExecutor) {
+        internal static String T06(String testID, TestExecutor testExecutor) {
             return "1.0001E7";
         }
     }

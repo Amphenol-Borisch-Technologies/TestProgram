@@ -19,19 +19,19 @@ using TestLibrary.TestSupport;
 namespace TestProgram {
     internal sealed partial class TestProgramTests {
 
-        internal static String T08(Test test, TestExecutor testExecutor) {
+        internal static String T08(String testID, TestExecutor testExecutor) {
             return $"0x{0xABCD:X4}";
         }
 
-        internal static String T09(Test test, TestExecutor testExecutor) {
-            TestCustomizable testCustomizable = (TestCustomizable)test.ClassObject;
-            if (String.Equals(testCustomizable.Arguments["CalibrationConstant"], "ϕ", StringComparison.Ordinal)) test.Result = EventCodes.PASS;
-            else test.Result = EventCodes.FAIL;
+        internal static String T09(String testID, TestExecutor testExecutor) {
+            TestCustomizable testCustomizable = (TestCustomizable)testExecutor.ConfigTest.Tests[testID].ClassObject;
+            if (String.Equals(testCustomizable.Arguments["CalibrationConstant"], "ϕ", StringComparison.Ordinal)) testExecutor.ConfigTest.Tests[testID].Result = EventCodes.PASS;
+            else testExecutor.ConfigTest.Tests[testID].Result = EventCodes.FAIL;
             return "ϕ";
         }
 
-        internal static String T11(Test test, TestExecutor testExecutor) {
-            TestTextual testTextual = (TestTextual)test.ClassObject;
+        internal static String T11(String testID, TestExecutor testExecutor) {
+            TestTextual testTextual = (TestTextual)testExecutor.ConfigTest.Tests[testID].ClassObject;
             return testTextual.Text;
         }
     }

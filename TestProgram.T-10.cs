@@ -19,14 +19,14 @@ using TestLibrary.TestSupport;
 namespace TestProgram {
     internal sealed partial class TestProgramTests {
 
-        internal static String T07(Test test, TestExecutor testExecutor) {
-            (String standardError, String standardOutput) = ISP("MPLAB PICkit 4 In-Circuit Debugger", "J11", test, testExecutor.Instruments, PowerISPMethod);
+        internal static String T07(String testID, TestExecutor testExecutor) {
+            (String standardError, String standardOutput) = ISP("MPLAB PICkit 4 In-Circuit Debugger", "J11", testExecutor.ConfigTest.Tests[testID], testExecutor.Instruments, PowerISPMethod);
             // NOTE: Parse & return portion of ISP's standardError/standardOutput corresponding to App.config's ISPResult.
             return $"0x{0x050C:X4}";
         }
 
-        internal static String T10(Test test, TestExecutor testExecutor) {
-            TestTextual testTextual = (TestTextual)test.ClassObject;
+        internal static String T10(String testID, TestExecutor testExecutor) {
+            TestTextual testTextual = (TestTextual)testExecutor.ConfigTest.Tests[testID].ClassObject;
             return testTextual.Text.ToLower();
         }
     }
