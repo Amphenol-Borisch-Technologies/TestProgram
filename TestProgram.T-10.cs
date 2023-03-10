@@ -17,13 +17,13 @@ using TestLibrary.TestSupport;
 namespace TestExecutor {
     internal sealed partial class TestProgramTests {
 
-        internal static String T07(String testID, TestExecutor testExecutor) {
-            String ExitCode = TestTasks.ISP_ExitCode("MPLAB PICkit 4 In-Circuit Debugger", "J11", testExecutor.ConfigTest.Tests[testID], testExecutor.Instruments, PowerISPMethod);
+        internal static String T07() {
+            String ExitCode = TestTasks.ISP_ExitCode("MPLAB PICkit 4 In-Circuit Debugger", "J11", TestExecutor.Instance.ConfigTest.Tests[TestExecutor.TestID], TestExecutor.Instance.Instruments, PowerISPMethod);
             return $"0x{0x050C:X4}";
         }
 
-        internal static String T10(String testID, TestExecutor testExecutor) {
-            TestTextual testTextual = (TestTextual)testExecutor.ConfigTest.Tests[testID].ClassObject;
+        internal static String T10() {
+            TestTextual testTextual = (TestTextual)TestExecutor.Instance.ConfigTest.Tests[TestExecutor.TestID].ClassObject;
             return testTextual.Text.ToLower();
         }
     }

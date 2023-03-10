@@ -17,19 +17,19 @@ using TestLibrary.TestSupport;
 namespace TestExecutor {
     internal sealed partial class TestProgramTests {
 
-        internal static String T08(String testID, TestExecutor testExecutor) {
+        internal static String T08() {
             return $"0x{0xABCD:X4}";
         }
 
-        internal static String T09(String testID, TestExecutor testExecutor) {
-            TestCustomizable testCustomizable = (TestCustomizable)testExecutor.ConfigTest.Tests[testID].ClassObject;
-            if (String.Equals(testCustomizable.Arguments["CalibrationConstant"], "ϕ", StringComparison.Ordinal)) testExecutor.ConfigTest.Tests[testID].Result = EventCodes.PASS;
-            else testExecutor.ConfigTest.Tests[testID].Result = EventCodes.FAIL;
+        internal static String T09() {
+            TestCustomizable testCustomizable = (TestCustomizable)TestExecutor.Instance.ConfigTest.Tests[TestExecutor.TestID].ClassObject;
+            if (String.Equals(testCustomizable.Arguments["CalibrationConstant"], "ϕ", StringComparison.Ordinal)) TestExecutor.Instance.ConfigTest.Tests[TestExecutor.TestID].Result = EventCodes.PASS;
+            else TestExecutor.Instance.ConfigTest.Tests[TestExecutor.TestID].Result = EventCodes.FAIL;
             return "ϕ";
         }
 
-        internal static String T11(String testID, TestExecutor testExecutor) {
-            TestTextual testTextual = (TestTextual)testExecutor.ConfigTest.Tests[testID].ClassObject;
+        internal static String T11() {
+            TestTextual testTextual = (TestTextual)TestExecutor.Instance.ConfigTest.Tests[TestExecutor.TestID].ClassObject;
             return testTextual.Text;
         }
     }
