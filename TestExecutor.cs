@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestLibrary;
 
-namespace TestExecutor {
+namespace TestProgram {
     internal class TestExecutorMain {
         [STAThread]
         static void Main() {
@@ -29,7 +29,7 @@ namespace TestExecutor {
             // NOTE: Override abstract TestExecutive.RunTestAsync() method.
             // Implementing RunTestAsync() in TestExecutive.RunTestAsync() necessiates a reference to this client Test project in TestExecutive, and we don't want that.
             TestID = testID;
-            Type type = Type.GetType("TestExecutor.IsoMicroTests");
+            Type type = Type.GetType("TestProgram.TestProgramTests");
             MethodInfo methodInfo = type.GetMethod(TestExecutor.TestID, BindingFlags.Static | BindingFlags.NonPublic);
             Object o = await Task.Run(() => methodInfo.Invoke(null, null));
             return (String)o;

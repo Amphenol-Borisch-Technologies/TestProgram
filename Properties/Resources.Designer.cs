@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestExecutor.Properties {
+namespace TestProgram.Properties {
     using System;
     
     

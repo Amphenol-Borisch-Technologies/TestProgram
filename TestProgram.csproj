@@ -51,14 +51,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>TestExecutor.TestExecutorMain</StartupObject>
+    <StartupObject>TestProgram.TestExecutorMain</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\Amphenol.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="TestExecutor.cs" />
-    <Compile Include="TestProgram.Shared.cs" />
+    <Compile Include="TestProgramTestSupport.cs" />
     <Compile Include="TestProgram.T-10.cs" />
     <Compile Include="TestProgram.T-20.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

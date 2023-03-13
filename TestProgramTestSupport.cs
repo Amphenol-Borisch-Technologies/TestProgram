@@ -8,9 +8,6 @@ using TestLibrary.Instruments;
 using TestLibrary.Instruments.Keysight;
 using TestLibrary.TestSupport;
 
-// NOTE: Place all Test methods, convenience methods, classes & comments applicable to multiple Groups in this file.
-//  - Do not place them in any other file, as methods & classes must be unique within a namespace.
-// NOTE: All Test Programs include a TestProgram.Shared.cs file, if only to contain shared RunTestMethod() and these Notes.
 // NOTE: Test Developer is responsible for ensuring Tests can be both safely & correctly called in sequence defined in App.config:
 //  - That is, if Tests execute sequentially as (T01, T02, T03, T04, T05), Test Developer is responsible for ensuring all equipment is
 //    configured safely & correctly between each Test step.
@@ -64,7 +61,7 @@ using TestLibrary.TestSupport;
 //        - Test Developer must set TestCancellationException's message to Measeured
 //          value for it to be Logged, else default String.Empty or Double.NaN values are Logged.
 //
-namespace TestExecutor {
+namespace TestProgram {
     internal sealed partial class TestProgramTests {
         static TestProgramTests() { }
 
